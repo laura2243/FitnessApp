@@ -3,11 +3,11 @@ package com.example.demo.services;
 import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
-import com.example.demo.models.Role;
+import com.example.demo.models.RoleEntity;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JWTGenerator;
-import com.example.demo.user.UserEntity;
+import com.example.demo.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.Optional;
 
 @Component
@@ -62,8 +61,8 @@ public class AuthService {
 
         UserEntity userEntity = new UserEntity(registerDto.getName(), registerDto.getEmail(), registerDto.getHeight(), registerDto.getKg(), registerDto.getAge(), registerDto.getUsername(), passwordEncoder.encode(registerDto.getPassword()));
 
-        Role roles = roleRepository.findByName("USER").get();
-        userEntity.setRoles(Collections.singletonList(roles));
+        RoleEntity roles = roleRepository.findByName("USER").get();
+        userEntity.setRole(roles);
 
         userRepository.saveAndFlush(userEntity);
 

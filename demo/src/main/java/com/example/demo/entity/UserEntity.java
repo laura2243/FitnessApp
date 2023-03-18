@@ -1,5 +1,5 @@
-package com.example.demo.user;
-import com.example.demo.models.Role;
+package com.example.demo.entity;
+import com.example.demo.models.RoleEntity;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -69,9 +69,14 @@ public class UserEntity {
                 ", age=" + age +
                 '}';
     }
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
-    private List<Role> roles = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private RoleEntity role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "userWorkout",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "workout_id"))
+    private List<WorkoutEntity> workouts = new ArrayList<>();
 
 }
