@@ -3,7 +3,7 @@ package com.example.demo.services;
 import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
-import com.example.demo.models.RoleEntity;
+import com.example.demo.entity.RoleEntity;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JWTGenerator;

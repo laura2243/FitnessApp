@@ -1,5 +1,4 @@
 package com.example.demo.entity;
-import com.example.demo.models.RoleEntity;
 import jakarta.persistence.*;
 
 import lombok.Getter;

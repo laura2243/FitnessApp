@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.models.RoleEntity;
+import com.example.demo.entity.RoleEntity;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;

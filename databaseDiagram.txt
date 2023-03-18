@@ -1,0 +1,53 @@
+@startuml
+!theme vibrant
+
+
+class exercises {
+   age: integer
+   description: varchar(255)
+   duration: integer
+   height: integer
+   kg: integer
+   name: varchar(255)
+   typeid: integer
+   workoutid: integer
+   id: integer
+}
+class roles {
+   name: varchar(255)
+   id: integer
+}
+class types {
+   name: varchar(255)
+   id: integer
+}
+class user_workout {
+   user_id: integer
+   workout_id: integer
+}
+class users {
+   age: integer
+   email: varchar(255)
+   height: integer
+   kg: integer
+   name: varchar(255)
+   password: varchar(255)
+   username: varchar(255)
+   role_id: integer
+   id: integer
+}
+class workouts {
+   date_finish: timestamp(6)
+   date_start: timestamp(6)
+   duration: integer
+   typeid: integer
+   id: integer
+}
+
+exercises     -[#595959,plain]-^  types        : "typeid:id"
+exercises     -[#595959,plain]-^  workouts     : "workoutid:id"
+user_workout  -[#595959,plain]-^  users        : "user_id:id"
+user_workout  -[#595959,plain]-^  workouts     : "workout_id:id"
+users         -[#595959,plain]-^  roles        : "role_id:id"
+workouts      -[#595959,plain]-^  types        : "typeid:id"
+@enduml

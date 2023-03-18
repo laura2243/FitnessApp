@@ -25,4 +25,8 @@ public class WorkoutEntity {
 
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "workout")
     private Set<ExerciseEntity> exercises;
+
+
+
+
 }
