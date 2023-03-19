@@ -13,7 +13,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
+/**
+ * Class that implements a custom filter for the security filter chain.
+ */
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
 
@@ -21,6 +23,15 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private JWTGenerator tokenGenerator;
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
+    /**
+     * Link in the security filter chain where it will perform a check to see if there is a token within the header.
+     * @param response
+     * @param filterChain
+     * @param request
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -39,6 +50,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request,response);
 
     }
+
+    /**
+     * Method that is going to take the token out of the header
+     * @param request
+     * @return token if it exits, otherwise null
+     */
     private String getJWTFromRequest(HttpServletRequest request){
         String beaderToken = request.getHeader("Authorization");
         if(StringUtils.hasText(beaderToken) && beaderToken.startsWith("Bearer ")) {

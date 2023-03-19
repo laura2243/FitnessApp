@@ -23,7 +23,6 @@ public class UserEntity {
     private Integer height;
     private Integer kg;
     private Integer age;
-
     private String username;
     private String password;
     public UserEntity(Integer id,

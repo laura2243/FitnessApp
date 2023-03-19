@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Interface that uses JPA to create query methods for pulling specific information about UserEntity objects from the database
+ */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 

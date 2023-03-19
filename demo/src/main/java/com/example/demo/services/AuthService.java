@@ -46,9 +46,14 @@ public class AuthService {
     }
 
 
-
-
-
+    /**
+     * Method that registers a new user in the application
+     * if the user registers successfully it returns status 200 OK otherwise
+     * if the username or the email is taken an error message will be shown and
+     * the registration will not succeed
+     * @param registerDto
+     * @return ResponseEntity<String>
+     */
     public ResponseEntity<String> register(RegisterDto registerDto) {
         Optional<UserEntity> userOptionalEmail = userRepository.findUserByEmail(registerDto.getEmail());
         Optional<UserEntity> userOptionalUsername = userRepository.findUserByUsername(registerDto.getUsername());
@@ -69,6 +74,14 @@ public class AuthService {
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);
     }
 
+
+    /**
+     * Method for login of a user that already has an account in the application
+     * if the user logins successfully it returns status 200 OK and a token otherwise
+     * if the username or password are incorrect  it returns status 401 Unauthorized
+     *@param loginDto
+     *@return AuthResponseDto
+     */
     public ResponseEntity<AuthResponseDto> login(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));

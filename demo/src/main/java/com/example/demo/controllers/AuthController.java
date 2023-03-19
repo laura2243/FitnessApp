@@ -35,6 +35,10 @@ public class AuthController {
 
 
 
+    /**
+     * method that handles the api call for login
+     * it calls the method from the service package
+     */
     @PostMapping("login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
        return authService.login(loginDto);
@@ -42,6 +46,10 @@ public class AuthController {
     }
 
 
+    /**
+     * method that handles the api call for register
+     * it calls the method from the service package
+     */
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 

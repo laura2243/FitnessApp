@@ -19,21 +19,32 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * class for keeping the security configurations of the application
+ * @Configuration annotation indicates that the class has @Bean definition methods
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Autowired
     private JwtAuthEntryPoint authEntryPoint;
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService, JwtAuthEntryPoint authEntryPoint) {
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig( JwtAuthEntryPoint authEntryPoint) {
         this.authEntryPoint = authEntryPoint;
     }
 
+    /**
+     * Method which integrates a builder pattern that is going to build the actual security chain
+     * It establishes the URLs' pattern that the filter will be applied on,
+     * as well as authentication and authorization only to users who have roles
+     *
+     * @param http
+     * @return SecurityFilterChain configured
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -55,16 +66,32 @@ public class SecurityConfig {
     }
 
 
+
+    /**
+     * Method that configures the authentication manager base on authentication configuration
+     * @param authenticationConfiguration
+     * @return AuthenticationManager
+     * @throws Exception
+     */
    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
    }
 
+    /**
+     * Method for encrypting the passwords using the BCrypt hashing function
+     * @return BCryptPasswordEncoder
+     */
    @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
    }
 
+
+    /**
+     * Method that allows us to access the authentication filter
+     * @return JWTAuthenticationFilter
+     */
    @Bean
     public JWTAuthenticationFilter jwtAuthenticationFilter(){
         return new JWTAuthenticationFilter();

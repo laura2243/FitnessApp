@@ -1,4 +1,5 @@
 package com.example.demo.security;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,12 +9,25 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * Class it is going to handle exceptions before they reach the Servlet.
+ */
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
 
+
+    /**
+     * Generates an error based on the authentication  exception
+     *
+     * @param request
+     * @param authException
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,authException.getMessage());
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
 
     }
 }
