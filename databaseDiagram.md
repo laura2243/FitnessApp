@@ -1,5 +1,4 @@
-![Database](https://www.planttext.com/api/plantuml/svg/hLLDRzim3BtxLt0TCCJ0Z683MXI1OVIqIw-x1xB5s48isv3bDa7I_pvQKMpE7-qEKow9zDuZ-KGgpwqLndQw3Bv8tAiAeJ5A2tFQ7V2qEOOGfqcSrMLjjb_JfwV77_Jp6nqbyRtRJU0OtwV9mDxN1bLU3MnF5VsQCGUM5Mc9FHuhg-m9ZX37iFdz7TuAPJ64P0n0t4vNN1lt_OV4DKeb8eDPRUHVKMo1cWehXQg28BW6moEQJBNOXkS0u2OhSWotaAfSLPPjIsmpenghwegENuN92c4sFnyUGWxgZF28cK11fXHswUIGB-rMGkD29EwkFJMev40cntwza4yJr5jj3dLdbu7ygXaYUFSUcReaV-3yUM8p9PB17CqWrMVxdwIw5itEr-KLUSMSxw0aCggisCH9NdgPnvEOr7FjdLksupvgeShrjXbQOyvqlJ7VNZ7EdpQYRQa4kOxeS_-71kjlVyTluAFEcLwIDt5YaHGMTpJ6gYs8OvL6UdvqitaCfo3tB7s06MUD-RCu7fycVvNa9GJ3um3lKNIvWElUBTnTHRTAtZ48U12jMzNzTo3yC7sEmXiNu7A9eZF1N2U1NyJnFRl062WhOJZBdTtm_NAppCBustM4KSzNukfbO5Pty8oLfF-BFm00)
-
+![Database](https://www.planttext.com/api/plantuml/svg/hLN1QkCm4BtxAsQxiCHGKtQX9GHZUkgbrxq7nPh48fPiPBbDIFhlErOKPzQrcrAgN1BflJVpHZFAO-E4TQqkenyIryeWr5PfOVVBBUvdknZILPRcLLdPnS_LVFxmctx-egCilVEx6UpIkrNMizULHRKnFJjGHRVUCNkM4wiIEpmQfzmUTf2cCFjx2w-5SXX3TWb0t5ORhethxaFY6gKIYSMyilA_AAv0JSPAeKmKHQTWk4ERgmQR-101d6N51kC5AEDmWvRjIsnogsgdAaFdByBcXR2pF_VtCGUrLWJ4UuM2obAuqQFjPdJR28qZmNY5tRv69IziAjlJCnLh07kjxBPgtGIINpY7H6-XLBOggKnmk9xRLQakuM-IQXkqo-0iA7BFdE-X97ArK9mKfCTvF8c1dwaMGYrKETqytzOVuRGMJKCMv3IYo_qJFTRT_lAhhHEAE2YH50wNDCsgAOZZb4PwXNGzUuY78FywVO0PdRXFJiWW-PCajn3rRmIy9Sdn2Bvx5t1p4bqeUSCW442qpgwxxq3uVluyXJSkmF6O90U2-Kw2i8WJUdQ4qLCcmd2MFplZk-LdcOK9j-i95xtWnFjbOEOxUaGZwM_Z7m00)
 @startuml
 !define primary_key(x) <b><color:#b8861b><&key></color> x</b>
 !define foreign_key(x) <color:#aaaaa><&key></color> x
@@ -9,15 +8,15 @@
 
 
 table(exercises){
-   column(age): bigint
+   column(age): integer
    column(description): varchar(255)
-   column(duration): bigint
-   column(height): bigint
-   column(kg): bigint
+   column(duration): integer
+   column(height): integer
+   column(kg): integer
    column(name): varchar(255)
-   foreign_key(typeid): bigint <<FK>>
-   foreign_key(workoutid): bigint <<FK>>
-   primary_key(id): bigint
+   foreign_key(typeid): integer <<FK>>
+   foreign_key(workoutid): integer <<FK>>
+   primary_key(id): integer
 }
 table(roles) {
    column(name): varchar(255)
