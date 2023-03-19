@@ -24,7 +24,8 @@ training. Most of the features and function are similar to those on any windows 
 ## Benefits
 One of the most important benefits of using a fitness app is 'motivation'. Notification and reminders from fitness apps keep reminding you about your health goals, thus keeping you motivated.
 You may also come across your fitness app various times in a day while using your smartphone. Fitness apps have made our lives easier and enable you to track your activities on a daily basis. Thus, making you stay focused on your activities and overall fitness.
-
+## Database Design
+![Database](https://www.planttext.com/api/plantuml/svg/hLN1QkCm4BtxAsQxiCHGKtQX9GHZUkgbrxq7nPh48fPiPBbDIFhlErOKPzQrcrAgN1BflJVpHZFAO-E4TQqkenyIryeWr5PfOVVBBUvdknZILPRcLLdPnS_LVFxmctx-egCilVEx6UpIkrNMizULHRKnFJjGHRVUCNkM4wiIEpmQfzmUTf2cCFjx2w-5SXX3TWb0t5ORhethxaFY6gKIYSMyilA_AAv0JSPAeKmKHQTWk4ERgmQR-101d6N51kC5AEDmWvRjIsnogsgdAaFdByBcXR2pF_VtCGUrLWJ4UuM2obAuqQFjPdJR28qZmNY5tRv69IziAjlJCnLh07kjxBPgtGIINpY7H6-XLBOggKnmk9xRLQakuM-IQXkqo-0iA7BFdE-X97ArK9mKfCTvF8c1dwaMGYrKETqytzOVuRGMJKCMv3IYo_qJFTRT_lAhhHEAE2YH50wNDCsgAOZZb4PwXNGzUuY78FywVO0PdRXFJiWW-PCajn3rRmIy9Sdn2Bvx5t1p4bqeUSCW442qpgwxxq3uVluyXJSkmF6O90U2-Kw2i8WJUdQ4qLCcmd2MFplZk-LdcOK9j-i95xtWnFjbOEOxUaGZwM_Z7m00)
 ## Functionalities
 #### 1.Register
 - a new user has the ability to register into the application by filling out a register form where he has to choose a username and a password and also to declare his height, date of birth and kilograms.
