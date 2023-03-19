@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The class that is responsible for processing incoming REST API requests for login and register, converts
+ * the JSON parameter to a user object and it sends it to the service layer.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

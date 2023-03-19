@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * The class that is responsible for processing incoming REST API requests for the interaction with the user,
+ * converts the JSON parameter to a user object, and it sends it to the service layer.
+ */
 @RestController
 @RequestMapping(path = "api/v1/user")
 public class UserController {
