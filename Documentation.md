@@ -41,4 +41,33 @@ You may also come across your fitness app various times in a day while using you
 #### 5. Create custom workouts
 - the user can create its own workout consisting of the available exercises so that its preferrences will be satisfied completely. 
 
+# Security
+#### Initialization of Spring Security
+In order to add security to my Spring Boot application I used Spring Security Starter pack and I added the security starter dependency in the pom.xml.This will also include the SecurityAutoConfiguration class containing the initial/default security configuration.
+I used JWT security which generates a security password each time you add spring security to pom.xml, spring boot generates a password in memory, it does not add it to the database.
+
+#### Configuration
+I used Filter Chains for the first configuration of Spring Boot Security. Spring Security maintains a filter chain internally where each of the filters has a particular responsibility and filters are added or removed from the configuration depending on which services are required. The ordering of the filters is important as there are dependencies between them. 
+###### Filter Security Chains
+The client sends a request to the application, and the container decides which filters and which servlet apply to it based on the path of the request URI. At most, one servlet can handle a single request, but filters form a chain, so they are ordered.
+Each filter that we go through, is going to pass through it the HTTP request and the HTTP respone depending which way we traverse the chain.
+The request is going to go through all the filter chains until it hits the Servlet request
+where it will finally be routed to the controllers from the servlet.
+The request will be intercepted before it goes to the controller.
+
+#### Spring Boot Security Role-based Authorization
+For role-based authorization with credentials and authorities stored in database, I created the following 2 tables: Users, Roles. 
+The users table stores credentials and user details and the roles table stores authorities (rights : User and Admin). The entity relationship between users and roles is many-to-one because a user can have only one role and a role can be assigned to be one or more users. 
+The authentication privilage means that a user can actualy use the software, he can log in and perform different actions regerding his account.
+The authorization privilage refersto the fact that even though a standard user can actual use the software, there are only certain software part that you he can use having some restrictions compared to an admin which has access to extended features of the application.
+
+#### Password Encoding
+For crypting all the passwords in the application, I used BCryptPasswordEncoder. It uses the BCrypt strong hashing function. Bcrypt uses adaptive hash algorithm to store the password.
+BCrypt implements OpenBSD-style Blowfish password hashing using the scheme described in "A Future-Adaptable Password Scheme" by Niels Provos and David Mazieres.
+This password hashing system tries to thwart off-line password cracking using a computationally-intensive hashing algorithm, based on Bruce Schneier's Blowfish cipher. The work factor of the algorithm is parameterised, so it can be increased as computers get faster.
+
+
+
+
+
 
