@@ -1,53 +1,58 @@
 @startuml
-!theme vibrant
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaa><&key></color> x
+!define table(x) entity x << (T, white) >>
+!define column(x) <color:#efefef><&media-record></color> x
+!theme plain
 
 
-class exercises {
-   age: integer
-   description: varchar(255)
-   duration: integer
-   height: integer
-   kg: integer
-   name: varchar(255)
-   typeid: integer
-   workoutid: integer
-   id: integer
+table(exercises){
+   column(age): bigint
+   column(description): varchar(255)
+   column(duration): bigint
+   column(height): bigint
+   column(kg): bigint
+   column(name): varchar(255)
+   foreign_key(typeid): bigint <<FK>>
+   foreign_key(workoutid): bigint <<FK>>
+   primary_key(id): bigint
 }
-class roles {
-   name: varchar(255)
-   id: integer
+table(roles) {
+   column(name): varchar(255)
+   primary_key(id): integer
 }
-class types {
-   name: varchar(255)
-   id: integer
+table(types) {
+   column(name): varchar(255)
+   primary_key(id): integer
 }
-class user_workout {
-   user_id: integer
-   workout_id: integer
+table(user_workout) {
+   foreign_key(primary_key(user_id)): integer <<FK>>
+   foreign_key(primary_key(workout_id)): integer <<FK>>
 }
-class users {
-   age: integer
-   email: varchar(255)
-   height: integer
-   kg: integer
-   name: varchar(255)
-   password: varchar(255)
-   username: varchar(255)
-   role_id: integer
-   id: integer
+table(users) {
+   column(age): integer
+   column(email): varchar(255)
+   column(height): integer
+   column(kg): integer
+   column(name): varchar(255)
+   column(password): varchar(255)
+   column(username): varchar(255)
+   foreign_key(role_id): integer <<FK>>
+   primary_key(id): integer
 }
-class workouts {
-   date_finish: timestamp(6)
-   date_start: timestamp(6)
-   duration: integer
-   typeid: integer
-   id: integer
+table(workouts) {
+   column(date_finish): timestamp(6)
+   column(date_start): timestamp(6)
+   column(duration): integer
+   foreign_key(typeid): integer <<FK>>
+   primary_key(id)column: integer
 }
 
-exercises     -[#595959,plain]-^  types        : "typeid:id"
-exercises     -[#595959,plain]-^  workouts     : "workoutid:id"
-user_workout  -[#595959,plain]-^  users        : "user_id:id"
-user_workout  -[#595959,plain]-^  workouts     : "workout_id:id"
-users         -[#595959,plain]-^  roles        : "role_id:id"
-workouts      -[#595959,plain]-^  types        : "typeid:id"
+exercises }--|| types: "typeid:id"
+exercises   }--||    workouts     : "workoutid:id"
+user_workout  ||--{   users        : "user_id:id"
+user_workout   ||--{   workouts     : "workout_id:id"
+users    ||--{       roles        : "role_id:id"
+workouts  }--||  types        : "typeid:id"
+
 @enduml
