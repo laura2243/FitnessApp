@@ -15,11 +15,18 @@ public class TypeEntity {
     private Integer id;
     private String name;
 
+    public TypeEntity(String name) {
+        this.name = name;
+    }
+
+    public TypeEntity() {
+    }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "type")
     private Set<ExerciseEntity> exercises;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "type")
     private Set<WorkoutEntity> workouts;
+
 
 }

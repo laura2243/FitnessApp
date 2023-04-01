@@ -3,6 +3,8 @@ package com.example.demo.services;
 import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
+import com.example.demo.email.EmailObject;
+import com.example.demo.email.Event;
 import com.example.demo.entity.RoleEntity;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
@@ -33,6 +35,9 @@ public class AuthService {
     private JWTGenerator jwtGenerator;
     @Autowired
     private AuthenticationManager authenticationManager;
+
+//    @Autowired
+//    private Event event;
 
 
     @Autowired
@@ -71,7 +76,13 @@ public class AuthService {
 
         userRepository.saveAndFlush(userEntity);
 
+      //  EmailObject emailObject = new EmailObject(userEntity.getEmail(),"Registration","Registration completed!");
+
+       // event.sendMail(emailObject);
+
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);
+
+
     }
 
 
