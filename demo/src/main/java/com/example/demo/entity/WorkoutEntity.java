@@ -19,6 +19,15 @@ public class WorkoutEntity {
     private Date date_finish;
     private Integer duration;
 
+    public WorkoutEntity(Integer id, Date date_start, Date date_finish, Integer duration, TypeEntity type, Set<ExerciseEntity> exercises) {
+        this.id = id;
+        this.date_start = date_start;
+        this.date_finish = date_finish;
+        this.duration = duration;
+        this.type = type;
+        this.exercises = exercises;
+    }
+
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "typeID",referencedColumnName = "id")
     private TypeEntity type;

@@ -20,6 +20,18 @@ public class ExerciseEntity {
     private Integer age;
 
 
+    public ExerciseEntity( String name, String description, Integer duration, Integer height, Integer kg, Integer age) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.height = height;
+        this.kg = kg;
+        this.age = age;
+    }
+
+    public ExerciseEntity() {
+    }
+
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "typeID",referencedColumnName = "id")
     private TypeEntity type;
