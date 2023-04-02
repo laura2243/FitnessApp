@@ -104,38 +104,38 @@ The listener (observer) will consume an event of type NewUserEvent, is invoked s
 **User Endpoints**
 
 1. PUT - *updates an user data in database, if it exists and its username and email are not already taken.*
-```public  void updateUser( @PathVariable("userId") Integer userId, @RequestBody RegisterDto userEntity)```
+ - ```public  void updateUser( @PathVariable("userId") Integer userId, @RequestBody RegisterDto userEntity)```
 2. DELETE - *deletes a user from the database and its account, if it exists.*
-```public void deleteUser(@PathVariable("userId") Integer userId)```
+ - ```public void deleteUser(@PathVariable("userId") Integer userId)```
 3. GET - *finds all the users present in the database and returns them.*
-```public List<UserEntity> getUser()```
+ - ```public List<UserEntity> getUser()```
 
 **Authentication and registration Endpoints**
 1. (POST) REGISTER - *registers a new user in the application if the account doesn't exist*
-```public ResponseEntity<String> register(@RequestBody RegisterDto registerDto)```
+ - ```public ResponseEntity<String> register(@RequestBody RegisterDto registerDto)```
 2. (POST) LOGIN - *login of a user that already has an account in the application*
-```public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto)```
+ - ```public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto)```
 
 **Exercise Endpoints**
 1. POST - *adds a new exercise in the application if its name is not already taken*
-```public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto)```
+ - ```public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto)```
 2. GET - *finds all the exercises present in the database and returns them.*
- ```public List<ExerciseEntity> getExercises()```
+ - ```public List<ExerciseEntity> getExercises()```
 3. PUT - *updates an exercise's fields, if it exists*
-```public void updateExercise(@PathVariable("exerciseId") Integer exerciseId, @RequestBody ExerciseDto exerciseDto) ```
+ - ```public void updateExercise(@PathVariable("exerciseId") Integer exerciseId, @RequestBody ExerciseDto exerciseDto) ```
 4. DELETE - *deletes an exercise resource, if it exists*
-```public void deleteExercise(@PathVariable("exerciseId") Integer exerciseId)```
+ - ```public void deleteExercise(@PathVariable("exerciseId") Integer exerciseId)```
 
 **Type Endpoints**
 
 1. POST - *adds a new type in the application if its name is not already taken*
- ```public ResponseEntity<String> addType(@RequestBody TypeDto typeDto)```
+ -  ```public ResponseEntity<String> addType(@RequestBody TypeDto typeDto)```
 2. PUT - *updates a type's fields, if it exists.*
-``` public void updateType(@PathVariable("typeId") Integer typeId, @RequestBody TypeDto typeDto)```
+ - ``` public void updateType(@PathVariable("typeId") Integer typeId, @RequestBody TypeDto typeDto)```
 3. GET - *finds all the types present in the database and returns them.*
-```public List<TypeEntity> getType() ```
+ - ```public List<TypeEntity> getType() ```
 4. DELETE - *deletes a type resource, if it exists and it is not assigned to any exercise*
-```public void deleteType(@PathVariable("typeId") Integer typeId)```
+- ```public void deleteType(@PathVariable("typeId") Integer typeId)```
 
 
 
