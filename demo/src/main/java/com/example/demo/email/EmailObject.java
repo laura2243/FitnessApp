@@ -11,7 +11,7 @@ public class EmailObject {
     private String subject;
     private String body;
 
-    private String from = "writersworkspace403@gmail.com";
+    private String from = "writersworkspace430@gmail.com";
 
 
     public EmailObject(String toEmail, String subject, String body) {

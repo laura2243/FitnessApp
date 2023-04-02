@@ -4,8 +4,9 @@ import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.email.EmailObject;
-import com.example.demo.email.EmailSenderService;
 
+
+import com.example.demo.email.NewUserEvent;
 import com.example.demo.entity.RoleEntity;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
@@ -40,12 +41,10 @@ public class AuthService {
 
     private EmailObject emailObject;
 
-    @Autowired
-    private EmailSenderService emailSenderService;
+
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
-
 
 
     @Autowired
@@ -65,6 +64,7 @@ public class AuthService {
      * if the user registers successfully it returns status 200 OK otherwise
      * if the username or the email is taken an error message will be shown and
      * the registration will not succeed
+     *
      * @param registerDto
      * @return ResponseEntity<String>
      */
@@ -85,13 +85,14 @@ public class AuthService {
 
         userRepository.saveAndFlush(userEntity);
 
-        emailObject = new EmailObject(userEntity.getEmail(),"subj","body");
+        emailObject = new EmailObject(userEntity.getEmail(), "subj", "body");
 
 
-       // applicationEventPublisher.publishEvent(new NewUserEvent(this,userEntity));
+        applicationEventPublisher.publishEvent(new NewUserEvent(this, userEntity));
 
 
-        emailSenderService.sendSimpleMail(emailObject);
+        //emailSenderService.sendSimpleMail(emailObject);
+
 
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);
 
@@ -103,8 +104,9 @@ public class AuthService {
      * Method for login of a user that already has an account in the application
      * if the user logins successfully it returns status 200 OK and a token otherwise
      * if the username or password are incorrect  it returns status 401 Unauthorized
-     *@param loginDto
-     *@return AuthResponseDto
+     *
+     * @param loginDto
+     * @return AuthResponseDto
      */
     public ResponseEntity<AuthResponseDto> login(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
