@@ -67,6 +67,42 @@ For crypting all the passwords in the application, I used BCryptPasswordEncoder.
 BCrypt implements OpenBSD-style Blowfish password hashing using the scheme described in "A Future-Adaptable Password Scheme" by Niels Provos and David Mazieres.
 This password hashing system tries to thwart off-line password cracking using a computationally-intensive hashing algorithm, based on Bruce Schneier's Blowfish cipher. The work factor of the algorithm is parameterised, so it can be increased as computers get faster.
 
+# Functionalities
+**1. User Functionalities**
+Regarding authentication:
+- register an account (only if the username and email is not already taken)
+- login with an existing account
+
+**2. Admin Functionalities:**
+Regarding types:
+ - add a new exercise type
+ - remove a type (only if it is not included in an exercise routine)
+ - update an exercise type
+ - view all available types
+
+Regarding exercises:
+ - add a new exercise
+ - remove an exercise 
+ - update an exercise 
+ - view all available exercises
+ 
+**3. Sending Email of registration**
+The Observer pattern consists of the following participants:
+- The object that watches the state of another object is called the Observer.
+- The object being watched is called the Subject. A subject may have any number of observers. All observers are notified whenever the subject changes state.
+
+The Observer pattern is also known as Publish-Subscribe. The subject is the publisher. It sends out notifications without having to know who its observers are. Any number of observers can subscribe to receive notifications.
+
+For my observer pattern whenever any new user will register, the user will be notified via email. So, the user will have both the roles of Observer and Observable at different times. Based on the requirements of Subject, i used the ApplicationEvent interface that defines the contract methods to be implemented by any concrete subject.
+The publisher of the event (registration) is the class that holds the logic for registering a new user. The publisher (observable) constructs the event object and publishes it to anyone who's listening.
+To publish the event, the publisher can simply inject the ApplicationEventPublisher and use the publishEvent() API.
+The listener (observer) will consume an event of type NewUserEvent, is invoked synchronously and it is responsible with sending the email.
+
+
+
+
+
+
 
 
 
