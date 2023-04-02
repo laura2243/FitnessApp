@@ -28,11 +28,14 @@ public class WorkoutEntity {
         this.exercises = exercises;
     }
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    public WorkoutEntity() {
+    }
+
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "typeID",referencedColumnName = "id")
     private TypeEntity type;
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "workout")
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "workout")
     private Set<ExerciseEntity> exercises;
 
 

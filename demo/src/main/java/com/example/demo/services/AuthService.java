@@ -4,13 +4,15 @@ import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.email.EmailObject;
-import com.example.demo.email.Event;
+import com.example.demo.email.EmailSenderService;
+
 import com.example.demo.entity.RoleEntity;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JWTGenerator;
 import com.example.demo.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,8 +38,14 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    private Event event;
+    private EmailObject emailObject;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
 
 
     @Autowired
@@ -48,6 +56,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = jwtGenerator;
         this.authenticationManager = authenticationManager;
+
     }
 
 
@@ -76,9 +85,13 @@ public class AuthService {
 
         userRepository.saveAndFlush(userEntity);
 
-      //  EmailObject emailObject = new EmailObject(userEntity.getEmail(),"Registration","Registration completed!");
+        emailObject = new EmailObject(userEntity.getEmail(),"subj","body");
 
-       // event.sendMail(emailObject);
+
+       // applicationEventPublisher.publishEvent(new NewUserEvent(this,userEntity));
+
+
+        emailSenderService.sendSimpleMail(emailObject);
 
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);
 

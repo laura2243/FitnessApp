@@ -1,8 +1,10 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,11 +24,31 @@ public class TypeEntity {
     public TypeEntity() {
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "type")
-    private Set<ExerciseEntity> exercises;
+    public TypeEntity(Integer id) {
+        this.id = id;
+    }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "type")
+    public List<ExerciseEntity> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<ExerciseEntity> exercises) {
+        this.exercises = exercises;
+    }
+
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "type")
+    private List<ExerciseEntity> exercises;
+
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "type")
     private Set<WorkoutEntity> workouts;
 
-
+    @Override
+    public String toString() {
+        return "TypeEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", exercises=" + exercises +
+                ", workouts=" + workouts +
+                '}';
+    }
 }

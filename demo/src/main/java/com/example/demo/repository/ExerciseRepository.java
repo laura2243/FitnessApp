@@ -1,8 +1,10 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.ExerciseEntity;
+import com.example.demo.entity.TypeEntity;
 import com.example.demo.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,4 +15,9 @@ import java.util.Optional;
 @Repository
 public interface ExerciseRepository extends JpaRepository<ExerciseEntity,Integer> {
     Optional<ExerciseEntity> findUserByName(String name);
+
+    @Query("SELECT t FROM ExerciseEntity t where t.type = ?1")
+    Optional<ExerciseEntity> findTypeInExercise (String type);
+
+    Optional<ExerciseEntity> findExerciseEntitiesByType(TypeEntity type);
 }

@@ -4,6 +4,8 @@ import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.TypeEntity;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.repository.ExerciseRepository;
 import com.example.demo.repository.TypeRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +20,11 @@ import java.util.Optional;
 public class TypeService {
 
     private final TypeRepository typeRepository;
+    private final ExerciseRepository exerciseRepository;
 
-    public TypeService(TypeRepository typeRepository) {
+    public TypeService(TypeRepository typeRepository, ExerciseRepository exerciseRepository) {
         this.typeRepository = typeRepository;
+        this.exerciseRepository = exerciseRepository;
     }
 
     public List<TypeEntity> getTypes() {
@@ -31,15 +35,23 @@ public class TypeService {
     /**
      * method that deletes a type resource
      * if the type deleted successfully it modifies the database otherwise
-     * a message that the type does not exist
+     * a message that the type does not exist or that it's present in an exercise
      */
-    public void deleteType(Integer exerciseId) {
-        boolean exists = typeRepository.existsById(exerciseId);
-        if (!exists) {
-            throw new IllegalStateException("type with id" + exerciseId + "does not exists");
+    public ResponseEntity<String> deleteType(Integer typeId) {
+        boolean exists = typeRepository.existsById(typeId);
+        TypeEntity typeName = typeRepository.findById(typeId).orElseThrow(()->
+                new IllegalStateException("type with id" + typeId + "does not exists"));
+
+        Optional<ExerciseEntity> existsInExercise = exerciseRepository.findExerciseEntitiesByType(typeName);
+
+        if (existsInExercise.isPresent()) {
+
+            throw new IllegalStateException("type with id " + typeId + " is present in an exercise!");
 
         }
-        typeRepository.deleteById(exerciseId);
+        typeRepository.deleteById(typeId);
+        return new ResponseEntity<>("Type deleted successfully!", HttpStatus.OK);
+
     }
 
 

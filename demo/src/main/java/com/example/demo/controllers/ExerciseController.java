@@ -59,7 +59,7 @@ public class ExerciseController {
      * method that handles the api call for adding an exercise
      * it calls the method from the service package
      */
-    @PostMapping("addExercise")
+    @PostMapping
     public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto) {
 
         return exerciseService.addExercise(exerciseDto);

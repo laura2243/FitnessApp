@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.dto.ExerciseDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.repository.ExerciseRepository;
+import com.example.demo.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,17 @@ import java.util.Optional;
 public class ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
+    private final TypeRepository typeRepository;
+
 
     @Autowired
-    public ExerciseService(ExerciseRepository exerciseRepository) {
+    public ExerciseService(ExerciseRepository exerciseRepository, TypeRepository typeRepository) {
         this.exerciseRepository = exerciseRepository;
+        this.typeRepository = typeRepository;
     }
+
+
+
 
     public List<ExerciseEntity> getExercises() {
         return exerciseRepository.findAll();
@@ -101,7 +108,7 @@ public class ExerciseService {
 
         ExerciseEntity exerciseEntity = new ExerciseEntity(exerciseDto.getName(), exerciseDto.getDescription(),
                 exerciseDto.getDuration(), exerciseDto.getHeight(), exerciseDto.getKg(),
-                exerciseDto.getAge());
+                exerciseDto.getAge(),exerciseDto.getType());
 
 
         exerciseRepository.saveAndFlush(exerciseEntity);

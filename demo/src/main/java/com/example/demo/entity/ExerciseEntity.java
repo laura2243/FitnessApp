@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
 
+import com.example.demo.dto.TypeDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,15 +32,34 @@ public class ExerciseEntity {
         this.age = age;
     }
 
+    public ExerciseEntity( String name, String description, Integer duration, Integer height, Integer kg, Integer age, TypeEntity type) {
+
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.height = height;
+        this.kg = kg;
+        this.age = age;
+        this.type = type;
+    }
+
     public ExerciseEntity() {
     }
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "typeID",referencedColumnName = "id")
+    @JsonBackReference
+    public TypeEntity getType() {
+        return type;
+    }
+
+    @JsonBackReference
+    public WorkoutEntity getWorkout(){return workout;}
+
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "typeID",referencedColumnName = "id", nullable = false)
     private TypeEntity type;
 
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "workoutID",referencedColumnName = "id")
     private WorkoutEntity workout;
 
