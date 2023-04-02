@@ -51,7 +51,7 @@ public class ExerciseEntity {
         return type;
     }
 
-    @JsonBackReference
+
     public WorkoutEntity getWorkout(){return workout;}
 
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)

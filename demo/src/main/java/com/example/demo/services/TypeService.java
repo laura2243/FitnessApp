@@ -46,6 +46,7 @@ public class TypeService {
 
         if (existsInExercise.isPresent()) {
 
+
             throw new IllegalStateException("type with id " + typeId + " is present in an exercise!");
 
         }
@@ -62,7 +63,7 @@ public class TypeService {
      * and the changes will not be made
      */
     @Transactional
-    public void updateType(Integer typeId, TypeDto newType) {
+    public ResponseEntity<String> updateType(Integer typeId, TypeDto newType) {
         TypeEntity typeEntity = typeRepository.findById(typeId).orElseThrow(() -> new IllegalStateException("type with id " + typeId + " does not exist"));
 
         if (newType.getName() != null && newType.getName().length() > 0 && !Objects.equals(newType.getName(), typeEntity.getName())) {
@@ -75,6 +76,7 @@ public class TypeService {
         }
 
         typeRepository.saveAndFlush(typeEntity);
+        return new ResponseEntity<>("Type updated successfully!", HttpStatus.OK);
 
     }
 
@@ -91,7 +93,9 @@ public class TypeService {
     public ResponseEntity<String> addType(TypeDto typeDto) {
         Optional<TypeEntity> typeOptionalName = typeRepository.findUserByName(typeDto.getName());
         if (typeOptionalName.isPresent()) {
-            throw new IllegalStateException("name taken");
+
+            return new ResponseEntity<>("Type name already taken!", HttpStatus.BAD_REQUEST);
+
         }
 
 
