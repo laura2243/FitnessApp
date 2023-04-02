@@ -9,15 +9,22 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+/**
+ * class for setting up necessary details about the email
+ */
 @Component
 public class Email {
-
 
 
     @Autowired
     private JavaMailSender mailSender;
 
 
+    /**
+     * method that sets up the properties required for sending the email
+     *
+     * @return mailSender
+     */
     private static JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
@@ -35,6 +42,13 @@ public class Email {
         return mailSender;
     }
 
+    /**
+     * method that sets up the subject, body and sender for the email
+     *
+     * @param to
+     * @param subject
+     * @param text
+     */
     public static void sendSimpleMessage(
             String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();

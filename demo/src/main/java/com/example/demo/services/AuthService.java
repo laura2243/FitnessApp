@@ -3,7 +3,6 @@ package com.example.demo.services;
 import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegisterDto;
-import com.example.demo.email.EmailObject;
 
 
 import com.example.demo.email.NewUserEvent;
@@ -39,7 +38,6 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    private EmailObject emailObject;
 
 
 
@@ -85,13 +83,8 @@ public class AuthService {
 
         userRepository.saveAndFlush(userEntity);
 
-        emailObject = new EmailObject(userEntity.getEmail(), "subj", "body");
-
 
         applicationEventPublisher.publishEvent(new NewUserEvent(this, userEntity));
-
-
-        //emailSenderService.sendSimpleMail(emailObject);
 
 
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);
