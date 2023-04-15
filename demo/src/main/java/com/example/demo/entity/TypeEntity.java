@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -28,6 +29,8 @@ public class TypeEntity {
         this.id = id;
     }
 
+
+
     public List<ExerciseEntity> getExercises() {
         return exercises;
     }
@@ -40,7 +43,7 @@ public class TypeEntity {
     private List<ExerciseEntity> exercises;
 
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "type")
-    private Set<WorkoutEntity> workouts;
+    private List<WorkoutEntity> workouts;
 
     @Override
     public String toString() {
