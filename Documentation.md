@@ -26,7 +26,7 @@ One of the most important benefits of using a fitness app is 'motivation'. Notif
 You may also come across your fitness app various times in a day while using your smartphone. Fitness apps have made our lives easier and enable you to track your activities on a daily basis. Thus, making you stay focused on your activities and overall fitness.
 ## Database Design
 ![Database](https://www.planttext.com/api/plantuml/svg/hLN1Ri8m3BttAxnDcgYqQjeafWbL5QTTTjqTXTRGY2QjqdI0W7-V4q89h8LfMxX0_DvpdkEOSQsPqeqeWfiCPrmYL8eBfjQJ1Qu7gn3YQHAdPL6gqTtqzVNbYNxUKoY97-rk0gluSPgqx5cfaCzbotPKPjOtPilIR5gWmQFKNAzX1N4CWuy7MEPSOmZ9CG5n6o5zRPoP3uaBp3YB5AQboawow1m56IiObq4Gx9FX2bNAQwp3JG1muffduGYur3X7PMA-9xskq8_JGT_UwNXdi6Mf5cMZUv3E0vlZQIAtds6TAbvfNagAVpALvamDdeV3q0SrYZd4TuMS3fBhpj1YthajcS2EPC7EbKkL1PKAhjRgebohPghuPxMZN5EZchYIErN_ClmC5affhjwWJtBItJp_43_nv2SnLPtyhabGC5xqjyU_TO2BLgokgGnPFyBultPHhf0zPTeB_URf7Tu4qpYXAS7hd62Q2wJf9gh1ItWEibFl0gRpSP6De1qRi8kYxHPi9u_WTd-u4SzkFGWu4As3S_CT2DyE24ln6nXWkusY3S5iHu5Rn76zsy5eAJrfV9QD7V1csQVjfN5DQGb7FUV4-lN0dkzWZ3AZVv8l)
-## Functionalities
+## Features
 #### 1.Register
 - a new user has the ability to register into the application by filling out a register form where he has to choose a username and a password and also to declare his height, date of birth and kilograms.
 
@@ -66,6 +66,81 @@ The authorization privilage refersto the fact that even though a standard user c
 For crypting all the passwords in the application, I used BCryptPasswordEncoder. It uses the BCrypt strong hashing function. Bcrypt uses adaptive hash algorithm to store the password.
 BCrypt implements OpenBSD-style Blowfish password hashing using the scheme described in "A Future-Adaptable Password Scheme" by Niels Provos and David Mazieres.
 This password hashing system tries to thwart off-line password cracking using a computationally-intensive hashing algorithm, based on Bruce Schneier's Blowfish cipher. The work factor of the algorithm is parameterised, so it can be increased as computers get faster.
+
+# Functionalities
+**1. User Functionalities**
+Regarding authentication:
+- register an account (only if the username and email is not already taken)
+- login with an existing account
+
+**2. Admin Functionalities:**
+Regarding types:
+
+ - add a new exercise type
+ - remove a type (only if it is not included in an exercise routine)
+ - update an exercise type
+ - view all available types
+
+Regarding exercises:
+ - add a new exercise
+ - remove an exercise 
+ - update an exercise 
+ - view all available exercises
+ 
+
+**3. Sending Email of registration**
+The Observer pattern consists of the following participants:
+- The object that watches the state of another object is called the Observer.
+- The object being watched is called the Subject. A subject may have any number of observers. All observers are notified whenever the subject changes state.
+
+The Observer pattern is also known as Publish-Subscribe. The subject is the publisher. It sends out notifications without having to know who its observers are. Any number of observers can subscribe to receive notifications.
+
+For my observer pattern whenever any new user will register, the user will be notified via email. So, the user will have both the roles of Observer and Observable at different times. Based on the requirements of Subject, i used the ApplicationEvent interface that defines the contract methods to be implemented by any concrete subject.
+The publisher of the event (registration) is the class that holds the logic for registering a new user. The publisher (observable) constructs the event object and publishes it to anyone who's listening.
+To publish the event, the publisher can simply inject the ApplicationEventPublisher and use the publishEvent() API.
+The listener (observer) will consume an event of type NewUserEvent, is invoked synchronously and it is responsible with sending the email.
+
+# Endpoints
+**User Endpoints**
+
+1. PUT - *updates an user data in database, if it exists and its username and email are not already taken.*
+ - ```public  void updateUser( @PathVariable("userId") Integer userId, @RequestBody RegisterDto userEntity)```
+2. DELETE - *deletes a user from the database and its account, if it exists.*
+ - ```public void deleteUser(@PathVariable("userId") Integer userId)```
+3. GET - *finds all the users present in the database and returns them.*
+ - ```public List<UserEntity> getUser()```
+
+**Authentication and registration Endpoints**
+1. (POST) REGISTER - *registers a new user in the application if the account doesn't exist*
+ - ```public ResponseEntity<String> register(@RequestBody RegisterDto registerDto)```
+2. (POST) LOGIN - *login of a user that already has an account in the application*
+ - ```public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto)```
+
+**Exercise Endpoints**
+1. POST - *adds a new exercise in the application if its name is not already taken*
+ - ```public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto)```
+2. GET - *finds all the exercises present in the database and returns them.*
+ - ```public List<ExerciseEntity> getExercises()```
+3. PUT - *updates an exercise's fields, if it exists*
+ - ```public void updateExercise(@PathVariable("exerciseId") Integer exerciseId, @RequestBody ExerciseDto exerciseDto) ```
+4. DELETE - *deletes an exercise resource, if it exists*
+ - ```public void deleteExercise(@PathVariable("exerciseId") Integer exerciseId)```
+
+**Type Endpoints**
+
+1. POST - *adds a new type in the application if its name is not already taken*
+ -  ```public ResponseEntity<String> addType(@RequestBody TypeDto typeDto)```
+2. PUT - *updates a type's fields, if it exists.*
+ - ``` public void updateType(@PathVariable("typeId") Integer typeId, @RequestBody TypeDto typeDto)```
+3. GET - *finds all the types present in the database and returns them.*
+ - ```public List<TypeEntity> getType() ```
+4. DELETE - *deletes a type resource, if it exists and it is not assigned to any exercise*
+- ```public void deleteType(@PathVariable("typeId") Integer typeId)```
+
+
+
+
+
 
 
 
