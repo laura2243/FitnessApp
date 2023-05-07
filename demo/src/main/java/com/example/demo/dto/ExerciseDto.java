@@ -12,4 +12,14 @@ public class ExerciseDto {
     private Integer kg;
     private Integer age;
     private TypeEntity type;
+
+    public ExerciseDto(String name, String description, Integer duration, Integer height, Integer kg, Integer age, TypeEntity type) {
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.height = height;
+        this.kg = kg;
+        this.age = age;
+        this.type = type;
+    }
 }

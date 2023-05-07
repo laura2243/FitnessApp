@@ -5,6 +5,7 @@ import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.WorkoutDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.WorkoutEntity;
+import com.example.demo.interfaceService.WorkoutServiceInterface;
 import com.example.demo.services.ExerciseService;
 import com.example.demo.services.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,10 @@ import java.util.Set;
 @RequestMapping(path = "api/workout")
 public class WorkoutController {
 
-    private final WorkoutService workoutService;
+    private final WorkoutServiceInterface workoutService;
 
     @Autowired
-    public WorkoutController(WorkoutService workoutService) {
+    public WorkoutController(WorkoutServiceInterface workoutService) {
         this.workoutService = workoutService;
     }
 

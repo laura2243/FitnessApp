@@ -3,6 +3,7 @@ package com.example.demo.services;
 
 import com.example.demo.dto.WorkoutDto;
 import com.example.demo.entity.WorkoutEntity;
+import com.example.demo.interfaceService.WorkoutServiceInterface;
 import com.example.demo.repository.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class WorkoutService {
+public class WorkoutService implements WorkoutServiceInterface {
 
     private final WorkoutRepository workoutRepository;
 
@@ -35,11 +36,14 @@ public class WorkoutService {
      * a message that the workout does not exist
      */
     public ResponseEntity<String> deleteWorkout(Integer workoutId) {
-        boolean exists = workoutRepository.existsById(workoutId);
-        if (!exists) {
-            throw new IllegalStateException("workout with id" + workoutId + "does not exists");
+//        boolean exists = workoutRepository.existsById(workoutId);
+//        if (!exists) {
+//            throw new IllegalStateException("workout with id" + workoutId + "does not exists");
+//
+//        }
 
-        }
+        workoutRepository.findById(workoutId).orElseThrow(() -> new IllegalStateException("workout with id " + workoutId + " does not exist"));
+
         workoutRepository.deleteById(workoutId);
         return new ResponseEntity<>("Workout deleted successfully!", HttpStatus.OK);
     }

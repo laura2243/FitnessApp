@@ -1,9 +1,12 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.RegisterDto;
+import com.example.demo.interfaceService.UserServiceInterface;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface {
 
 
     private final UserRepository userRepository;
@@ -32,13 +35,11 @@ public class UserService {
      * if the user deleted successfully it modifies the database otherwise
      * a message that the user does not exist
      */
-    public void deleteUser(Integer userId) {
-        boolean exists = userRepository.existsById(userId);
-        if (!exists) {
-            throw new IllegalStateException("user with id" + userId + "does not exists");
+    public ResponseEntity<String> deleteUser(Integer userId) {
+        userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + " does not exist"));
 
-        }
         userRepository.deleteById(userId);
+       return new ResponseEntity<>("User deleted successfully!", HttpStatus.OK);
     }
 
     /**
@@ -46,9 +47,11 @@ public class UserService {
      * if the user is update successfully it modifies the database otherwise
      * if the username or password is already taken an error message will be shown
      * and the changes will not be made
+     *
+     * @return
      */
     @Transactional
-    public void updateUser(Integer userId, RegisterDto newUserEntity) {
+    public UserEntity updateUser(Integer userId, RegisterDto newUserEntity) {
         UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + " does not exist"));
 
         if(newUserEntity.getName() != null && newUserEntity.getName().length() > 0 && !Objects.equals(newUserEntity.getName(), userEntity.getName())){
@@ -72,6 +75,7 @@ public class UserService {
         }
 
         userRepository.saveAndFlush(userEntity);
+        return userEntity;
 
     }
 }

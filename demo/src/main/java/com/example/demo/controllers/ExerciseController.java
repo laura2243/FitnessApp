@@ -5,6 +5,7 @@ import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.UserEntity;
+import com.example.demo.interfaceService.ExerciseServiceInterface;
 import com.example.demo.services.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,10 @@ import java.util.List;
 @RequestMapping(path = "api/exercise")
 public class ExerciseController {
 
-    private final ExerciseService exerciseService;
+    private final ExerciseServiceInterface exerciseService;
 
     @Autowired
-    public ExerciseController(ExerciseService exerciseService) {
+    public ExerciseController(ExerciseServiceInterface exerciseService) {
         this.exerciseService = exerciseService;
     }
 
@@ -60,7 +61,7 @@ public class ExerciseController {
      * it calls the method from the service package
      */
     @PostMapping
-    public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto) {
+    public ExerciseEntity addExercise(@RequestBody ExerciseDto exerciseDto) {
 
         return exerciseService.addExercise(exerciseDto);
     }

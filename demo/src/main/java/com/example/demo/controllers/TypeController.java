@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.TypeEntity;
+import com.example.demo.interfaceService.TypeServiceInterface;
 import com.example.demo.services.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,10 @@ import java.util.List;
 @RequestMapping(path = "api/type")
 public class TypeController {
 
-    private final TypeService typeService;
+    private final TypeServiceInterface typeService;
 
     @Autowired
-    public TypeController(TypeService typeService) {
+    public TypeController(TypeServiceInterface typeService) {
         this.typeService = typeService;
     }
 

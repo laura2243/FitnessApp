@@ -1,10 +1,9 @@
 package com.example.demo.services;
 
-import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.TypeEntity;
-import com.example.demo.entity.UserEntity;
+import com.example.demo.interfaceService.TypeServiceInterface;
 import com.example.demo.repository.ExerciseRepository;
 import com.example.demo.repository.TypeRepository;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class TypeService {
+public class TypeService implements TypeServiceInterface {
 
     private final TypeRepository typeRepository;
     private final ExerciseRepository exerciseRepository;
@@ -63,7 +62,7 @@ public class TypeService {
      * and the changes will not be made
      */
     @Transactional
-    public ResponseEntity<String> updateType(Integer typeId, TypeDto newType) {
+    public TypeEntity updateType(Integer typeId, TypeDto newType) {
         TypeEntity typeEntity = typeRepository.findById(typeId).orElseThrow(() -> new IllegalStateException("type with id " + typeId + " does not exist"));
 
         if (newType.getName() != null && newType.getName().length() > 0 && !Objects.equals(newType.getName(), typeEntity.getName())) {
@@ -76,7 +75,9 @@ public class TypeService {
         }
 
         typeRepository.saveAndFlush(typeEntity);
-        return new ResponseEntity<>("Type updated successfully!", HttpStatus.OK);
+        //return new ResponseEntity<>("Type updated successfully!", HttpStatus.OK);
+
+        return typeEntity;
 
     }
 

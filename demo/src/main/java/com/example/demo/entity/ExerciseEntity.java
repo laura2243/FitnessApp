@@ -48,6 +48,8 @@ public class ExerciseEntity {
         this.type = type;
     }
 
+
+
     public ExerciseEntity(Integer id, String name, String description, Integer duration, Integer height, Integer kg, Integer age, List<WorkoutEntity> workout, TypeEntity type) {
         this.id = id;
         this.name = name;
@@ -57,6 +59,17 @@ public class ExerciseEntity {
         this.kg = kg;
         this.age = age;
         this.workout = workout;
+        this.type = type;
+    }
+
+    public ExerciseEntity(Integer id, String name, String description, Integer duration, Integer height, Integer kg, Integer age, TypeEntity type) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.height = height;
+        this.kg = kg;
+        this.age = age;
         this.type = type;
     }
 

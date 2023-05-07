@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -19,13 +20,23 @@ public class WorkoutEntity {
     private Integer id;
 
     private String name;
-    private Date date_start;
-    private Date date_finish;
+    private SimpleDateFormat date_start;
+    private SimpleDateFormat date_finish;
     private Integer duration;
 
 
 
-    public WorkoutEntity( String name, Date date_start, Date date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
+    public WorkoutEntity( String name, SimpleDateFormat date_start, SimpleDateFormat date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
+        this.name = name;
+        this.date_start = date_start;
+        this.date_finish = date_finish;
+        this.duration = duration;
+        this.type = type;
+        this.exercises = exercises;
+    }
+
+    public WorkoutEntity(Integer id, String name, SimpleDateFormat date_start, SimpleDateFormat date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
+        this.id = id;
         this.name = name;
         this.date_start = date_start;
         this.date_finish = date_finish;

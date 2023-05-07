@@ -25,6 +25,18 @@ public class TypeEntity {
     public TypeEntity() {
     }
 
+    public TypeEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public TypeEntity(Integer id, String name, List<ExerciseEntity> exercises, List<WorkoutEntity> workouts) {
+        this.id = id;
+        this.name = name;
+        this.exercises = exercises;
+        this.workouts = workouts;
+    }
+
     public TypeEntity(Integer id) {
         this.id = id;
     }

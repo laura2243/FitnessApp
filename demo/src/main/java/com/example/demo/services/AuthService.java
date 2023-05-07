@@ -7,6 +7,7 @@ import com.example.demo.dto.RegisterDto;
 
 import com.example.demo.email.NewUserEvent;
 import com.example.demo.entity.RoleEntity;
+import com.example.demo.interfaceService.AuthServiceInterface;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JWTGenerator;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class AuthService {
+public class AuthService implements AuthServiceInterface {
 
     @Autowired
     private UserRepository userRepository;
@@ -37,22 +38,19 @@ public class AuthService {
     private JWTGenerator jwtGenerator;
     @Autowired
     private AuthenticationManager authenticationManager;
-
-
-
-
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
 
     @Autowired
     public AuthService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder,
-                       JWTGenerator jwtGenerator, AuthenticationManager authenticationManager) {
+                       JWTGenerator jwtGenerator, AuthenticationManager authenticationManager, ApplicationEventPublisher applicationEventPublisher) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = jwtGenerator;
         this.authenticationManager = authenticationManager;
+        this.applicationEventPublisher = applicationEventPublisher;
 
     }
 
@@ -102,11 +100,20 @@ public class AuthService {
      * @return AuthResponseDto
      */
     public ResponseEntity<AuthResponseDto> login(LoginDto loginDto) {
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
 
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtGenerator.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
+        Optional<UserEntity> userEntity = userRepository.findUserByUsername(loginDto.getUsername());
+
+
+        if (userEntity.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else throw new IllegalStateException("Account doesn't exist!");
+        //String token = jwtGenerator.generateToken(authentication);
+        // return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
 }
+

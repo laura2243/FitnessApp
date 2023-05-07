@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.dto.ExerciseDto;
 import com.example.demo.entity.ExerciseEntity;
+import com.example.demo.interfaceService.ExerciseServiceInterface;
 import com.example.demo.repository.ExerciseRepository;
 import com.example.demo.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class ExerciseService {
+public class ExerciseService implements ExerciseServiceInterface {
 
     private final ExerciseRepository exerciseRepository;
     private final TypeRepository typeRepository;
@@ -39,14 +40,20 @@ public class ExerciseService {
      * method that deletes an exercise resource
      * if the exercise deleted successfully it modifies the database otherwise
      * a message that the exercise does not exist
+     *
+     * @return
      */
-    public void deleteExercise(Integer exerciseId) {
-        boolean exists = exerciseRepository.existsById(exerciseId);
-        if (!exists) {
-            throw new IllegalStateException("exercise with id" + exerciseId + "does not exists");
+    public ResponseEntity<String> deleteExercise(Integer exerciseId) {
+//        boolean exists = exerciseRepository.existsById(exerciseId);
+//        if (!exists) {
+//            throw new IllegalStateException("exercise with id" + exerciseId + "does not exists");
+//
+//        }
+        exerciseRepository.findById(exerciseId).orElseThrow(() -> new IllegalStateException("exercise with id " + exerciseId + " does not exist"));
 
-        }
         exerciseRepository.deleteById(exerciseId);
+        return new ResponseEntity<>("Exercise deleted successfully!", HttpStatus.OK);
+
     }
 
 
@@ -55,9 +62,11 @@ public class ExerciseService {
      * if the exercise is update successfully it modifies the database otherwise
      * if the name is already taken an error message will be shown
      * and the changes will not be made
+     *
+     * @return
      */
     @Transactional
-    public void updateExercise(Integer exerciseId, ExerciseDto newExercise) {
+    public ExerciseEntity updateExercise(Integer exerciseId, ExerciseDto newExercise) {
         ExerciseEntity exerciseEntity = exerciseRepository.findById(exerciseId).orElseThrow(() -> new IllegalStateException("exercise with id " + exerciseId + " does not exist"));
 
         if (newExercise.getName() != null && newExercise.getName().length() > 0 && !Objects.equals(newExercise.getName(), exerciseEntity.getName())) {
@@ -87,6 +96,8 @@ public class ExerciseService {
 
         exerciseRepository.saveAndFlush(exerciseEntity);
 
+        return exerciseEntity;
+
     }
 
 
@@ -99,7 +110,7 @@ public class ExerciseService {
      * @param exerciseDto
      * @return ResponseEntity<String>
      */
-    public ResponseEntity<String> addExercise(ExerciseDto exerciseDto) {
+    public ExerciseEntity addExercise(ExerciseDto exerciseDto) {
         Optional<ExerciseEntity> exerciseOptionalName = exerciseRepository.findUserByName(exerciseDto.getName());
         if (exerciseOptionalName.isPresent()) {
             throw new IllegalStateException("name taken");
@@ -113,7 +124,8 @@ public class ExerciseService {
 
         exerciseRepository.saveAndFlush(exerciseEntity);
 
-        return new ResponseEntity<>("Exercise added successfully!", HttpStatus.OK);
+        //return new ResponseEntity<>("Exercise added successfully!", HttpStatus.OK);
+        return exerciseEntity;
     }
 
 }
