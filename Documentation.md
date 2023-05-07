@@ -172,8 +172,11 @@ I created a mock of WorkoutRepository using ```@Mock``` and create an WorkoutSer
 **EmailTests Class**
 For testing the EmailSenderService I used **GreenMail**. GreenMail is an open source, intuitive and easy-to-use test suite of email servers for testing purposes. GreenMail responds like a regular SMTP server but does not deliver any email, which enables it to be used in real life applications and real test cases. Messages can easily be extracted, verified and modified. 
 I created a mock of EmailSender using ```@Mock``` and create an Email instance using the mock instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
-
-
+-JUnit is loading the Spring context as instructed by the ```@ContextConfiguration``` annotation pointing to the Java Configuration class.
+– The ```@Resource``` annotation is autowiring the bean dependency directly on our test conveniently having it initialised during the test runtime.
+– We have an init() activity marked by JUnit’s ```@Before``` annotation where we instantiate our GreenMail mail server and changing the port of our email service to a test one.
+– The test method itself is a simple manner of initialising a test ```SimpleMailMessage``` and sending it via our email service that gets intercepted by GreenMail and further queried upon concerning the data received.
+– A cleanup functionality is closing the resourced during the ```@After``` JUnit instructed method.
 
 
 
