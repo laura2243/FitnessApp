@@ -1,10 +1,6 @@
 package com.example.demo;
 
 
-import com.example.demo.tests.DbOperation;
-import com.example.demo.tests.OperatiiDobanda;
-import com.example.demo.tests.TipDobanda;
-import com.example.demo.tests.UserRepo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

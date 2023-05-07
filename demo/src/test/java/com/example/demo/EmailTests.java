@@ -33,11 +33,9 @@ public class EmailTests {
     private GreenMail testSmtp;
 
     @Before
-    public void testSmtpInit(){
+    public void testSmtpInit() {
         testSmtp = new GreenMail(ServerSetupTest.SMTP);
         testSmtp.start();
-
-        //don't forget to set the test port!
         emailSender.setPort(3025);
         emailSender.setHost("localhost");
     }
@@ -50,10 +48,9 @@ public class EmailTests {
         message.setTo("test@receiver.com");
         message.setSubject("test subject");
         message.setText("test message");
-        //emailSender.send(message);
 
         Email email = new Email();
-       email.sendEmail(message,emailSender);
+        email.sendEmail(message, emailSender);
 
         assertTrue(testSmtp.waitForIncomingEmail(5000, 1));
         Message[] messages = testSmtp.getReceivedMessages();
@@ -64,7 +61,7 @@ public class EmailTests {
     }
 
     @After
-    public void cleanup(){
+    public void cleanup() {
         testSmtp.stop();
     }
 }

@@ -56,15 +56,13 @@ class ExerciseTests {
     @Test
     public void getAllExercices_success() {
 
-        ExerciseService exerciseServiceInterface = new ExerciseService(exerciseRepository, typeRepository);
+        ExerciseServiceInterface exerciseServiceInterface = new ExerciseService(exerciseRepository, typeRepository);
 
         ExerciseEntity exerciseEntity = new ExerciseEntity("name", "description", 5, 5, 5, 5);
         ExerciseEntity exerciseEntity2 = new ExerciseEntity("name1", "description1", 5, 5, 5, 5);
 
 
-        List<ExerciseEntity> exercises = new ArrayList<>(Arrays.asList(
-                exerciseEntity, exerciseEntity2
-        ));
+        List<ExerciseEntity> exercises = new ArrayList<>(Arrays.asList(exerciseEntity, exerciseEntity2));
 
         when(exerciseRepository.findAll()).thenReturn(exercises);
 
@@ -77,7 +75,7 @@ class ExerciseTests {
     @Test
     void shouldUpdateExercise() {
 
-        ExerciseService exerciseServiceInterface = new ExerciseService(exerciseRepository, typeRepository);
+        ExerciseServiceInterface exerciseServiceInterface = new ExerciseService(exerciseRepository, typeRepository);
 
         ExerciseEntity exerciseEntity = new ExerciseEntity("name", "description", 5, 5, 5, 5);
 
@@ -87,8 +85,8 @@ class ExerciseTests {
         when(exerciseRepository.findById(exerciseEntity.getId())).thenReturn(Optional.of(exerciseEntity));
 
         ExerciseEntity exerciseUpdated = exerciseServiceInterface.updateExercise(exerciseEntity.getId(), exerciseDtoUpdate);
+
         assertEquals(exerciseDtoUpdate.getName(), exerciseUpdated.getName());
-        // verify(userRepository) ????????
         verify(exerciseRepository).findById(exerciseEntity.getId());
 
 
@@ -97,9 +95,9 @@ class ExerciseTests {
     @Test
     void shouldDeleteUser() {
 
-        ExerciseService exercisesServiceInterface = new ExerciseService(exerciseRepository, typeRepository);
+        ExerciseServiceInterface exercisesServiceInterface = new ExerciseService(exerciseRepository, typeRepository);
 
-        ExerciseEntity exerciseEntity = new ExerciseEntity( "name", "description", 5, 5, 5, 5, new TypeEntity("type"));
+        ExerciseEntity exerciseEntity = new ExerciseEntity("name", "description", 5, 5, 5, 5, new TypeEntity("type"));
 
 
         when(exerciseRepository.findById(exerciseEntity.getId())).thenReturn(Optional.of(exerciseEntity));

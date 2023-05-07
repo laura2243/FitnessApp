@@ -65,14 +65,14 @@ public class AuthService implements AuthServiceInterface {
      * @return ResponseEntity<String>
      */
     public ResponseEntity<String> register(RegisterDto registerDto) {
-        Optional<UserEntity> userOptionalEmail = userRepository.findUserByEmail(registerDto.getEmail());
-        Optional<UserEntity> userOptionalUsername = userRepository.findUserByUsername(registerDto.getUsername());
-        if (userOptionalEmail.isPresent()) {
-            throw new IllegalStateException("email taken");
-        }
-        if (userOptionalUsername.isPresent()) {
-            throw new IllegalStateException("username taken");
-        }
+//        Optional<UserEntity> userOptionalEmail = userRepository.findUserByEmail(registerDto.getEmail());
+//        Optional<UserEntity> userOptionalUsername = userRepository.findUserByUsername(registerDto.getUsername());
+//        if (userOptionalEmail.isPresent()) {
+//            throw new IllegalStateException("email taken");
+//        }
+//        if (userOptionalUsername.isPresent()) {
+//            throw new IllegalStateException("username taken");
+//        }
 
         UserEntity userEntity = new UserEntity(registerDto.getName(), registerDto.getEmail(), registerDto.getHeight(), registerDto.getKg(), registerDto.getAge(), registerDto.getUsername(), passwordEncoder.encode(registerDto.getPassword()));
 

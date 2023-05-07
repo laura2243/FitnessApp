@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.entity.UserEntity;
+import com.example.demo.interfaceService.UserServiceInterface;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UserService;
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
@@ -31,7 +32,7 @@ class UserTests {
     @Test
     public void getAllUsers_success() {
 
-        UserService userServiceInterface = new UserService(userRepository);
+        UserServiceInterface userServiceInterface = new UserService(userRepository);
 
         UserEntity userEntity = new UserEntity("ana", "ana", 5, 5, 5, "username", "pass");
         UserEntity userEntity2 = new UserEntity("ana1", "ana1", 5, 5, 5, "username", "pass");
@@ -51,9 +52,9 @@ class UserTests {
     @Test
     void shouldUpdateUser() {
 
-        UserService userServiceInterface = new UserService(userRepository);
+        UserServiceInterface userServiceInterface = new UserService(userRepository);
 
-        UserEntity userEntity = new UserEntity(1,"name", "email", 5, 5, 5, "username", "pass");
+        UserEntity userEntity = new UserEntity(1, "name", "email", 5, 5, 5, "username", "pass");
 
         RegisterDto userEntityUpdate = new RegisterDto("usernameUpdate", "passUpdate", "nameUpdate", "emailUpdate", 10, 10, 10);
 
@@ -62,7 +63,6 @@ class UserTests {
 
         UserEntity userUpdated = userServiceInterface.updateUser(userEntity.getId(), userEntityUpdate);
         assertEquals(userEntityUpdate.getName(), userUpdated.getName());
-        // verify(userRepository) ????????
         verify(userRepository).findById(userEntity.getId());
 
 
@@ -72,9 +72,9 @@ class UserTests {
     void shouldDeleteUser() {
         int id = 1;
 
-        UserService userServiceInterface = new UserService(userRepository);
+        UserServiceInterface userServiceInterface = new UserService(userRepository);
 
-        UserEntity userEntity = new UserEntity(1,"name", "email", 5, 5, 5, "username", "pass");
+        UserEntity userEntity = new UserEntity(1, "name", "email", 5, 5, 5, "username", "pass");
 
 
         when(userRepository.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));

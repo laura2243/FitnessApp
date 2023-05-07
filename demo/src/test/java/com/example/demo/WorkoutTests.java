@@ -4,6 +4,7 @@ import com.example.demo.dto.WorkoutDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.TypeEntity;
 import com.example.demo.entity.WorkoutEntity;
+import com.example.demo.interfaceService.WorkoutServiceInterface;
 import com.example.demo.repository.TypeRepository;
 import com.example.demo.repository.WorkoutRepository;
 import com.example.demo.services.WorkoutService;
@@ -32,14 +33,12 @@ public class WorkoutTests {
     @Mock
     private WorkoutRepository workoutRepository;
 
-    @Mock
-    private TypeRepository typeRepository;
 
 
     @Test
     public void shouldSaveWorkout() {
 
-        WorkoutService workoutServiceInterface = new WorkoutService(workoutRepository);
+        WorkoutServiceInterface workoutServiceInterface = new WorkoutService(workoutRepository);
 
         List<ExerciseEntity> exercises = new ArrayList<ExerciseEntity>();
         exercises.add(new ExerciseEntity("name", "description", 5, 5, 5, 5));
@@ -56,9 +55,6 @@ public class WorkoutTests {
         BeanUtils.copyProperties(workoutDto, workoutEntityFromDto);
 
 
-//        WorkoutEntity workoutEntitySaved = workoutServiceInterface.addWorkout(workoutDto);
-//        assertEquals(workoutEntitySaved,workoutEntityFromDto);
-
         ResponseEntity<String> resultRespons = workoutServiceInterface.addWorkout(workoutDto);
         assertEquals(resultRespons.getStatusCode(), HttpStatus.OK);
         verify(workoutRepository).saveAndFlush(workoutEntityFromDto);
@@ -69,7 +65,7 @@ public class WorkoutTests {
     @Test
     public void getAllWorkout_success() {
 
-        WorkoutService workoutServiceInterface = new WorkoutService(workoutRepository);
+        WorkoutServiceInterface workoutServiceInterface = new WorkoutService(workoutRepository);
 
         List<ExerciseEntity> exercises = new ArrayList<ExerciseEntity>();
         exercises.add(new ExerciseEntity("name", "description", 5, 5, 5, 5));
@@ -96,13 +92,13 @@ public class WorkoutTests {
     @Test
     void shouldDeleteWorkout() {
 
-        WorkoutService workoutServiceInterface = new WorkoutService(workoutRepository);
+        WorkoutServiceInterface workoutServiceInterface = new WorkoutService(workoutRepository);
 
         List<ExerciseEntity> exercises = new ArrayList<ExerciseEntity>();
         exercises.add(new ExerciseEntity("name", "description", 5, 5, 5, 5));
         SimpleDateFormat dateStart = new SimpleDateFormat("2002-01-01");
 
-        WorkoutEntity workoutEntity = new WorkoutEntity(1,"name", dateStart, dateStart, 10, new TypeEntity("type"),
+        WorkoutEntity workoutEntity = new WorkoutEntity(1, "name", dateStart, dateStart, 10, new TypeEntity("type"),
                 exercises);
 
         when(workoutRepository.findById(workoutEntity.getId())).thenReturn(Optional.of(workoutEntity));

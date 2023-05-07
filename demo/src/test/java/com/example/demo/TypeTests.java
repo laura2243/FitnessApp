@@ -5,6 +5,7 @@ import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.TypeEntity;
+import com.example.demo.interfaceService.TypeServiceInterface;
 import com.example.demo.repository.ExerciseRepository;
 import com.example.demo.repository.TypeRepository;
 import com.example.demo.services.ExerciseService;
@@ -30,7 +31,6 @@ import static org.mockito.Mockito.when;
 public class TypeTests {
 
 
-
     @Mock
     private TypeRepository typeRepository;
 
@@ -41,21 +41,19 @@ public class TypeTests {
     @Test
     public void shouldSaveType() {
 
-        TypeService typeServiceInterface = new TypeService(typeRepository,exerciseRepository);
+        TypeServiceInterface typeServiceInterface = new TypeService(typeRepository, exerciseRepository);
 
         TypeDto typeDto = new TypeDto("name");
 
 
         when(typeRepository.save(any(TypeEntity.class))).thenReturn(new TypeEntity());
 
-       // TypeEntity typeEntitySaved = typeServiceInterface.addType(typeDto);
 
         TypeEntity typeEntityFromDto = new TypeEntity();
         BeanUtils.copyProperties(typeDto, typeEntityFromDto);
-       // assertEquals(typeEntitySaved, typeEntityFromDto);
 
         ResponseEntity<String> resultResponse = typeServiceInterface.addType(typeDto);
-        assertEquals(resultResponse.getStatusCode(),HttpStatus.OK);
+        assertEquals(resultResponse.getStatusCode(), HttpStatus.OK);
         verify(typeRepository).saveAndFlush(typeEntityFromDto);
 
 
@@ -64,7 +62,7 @@ public class TypeTests {
     @Test
     public void getAllTypes_success() {
 
-        TypeService typeServiceInterface = new TypeService( typeRepository,exerciseRepository);
+        TypeServiceInterface typeServiceInterface = new TypeService(typeRepository, exerciseRepository);
 
         TypeEntity typeEntity = new TypeEntity("name1");
         TypeEntity typeEntity2 = new TypeEntity("name2");
@@ -85,9 +83,9 @@ public class TypeTests {
     @Test
     void shouldUpdateType() {
 
-        TypeService typeServiceInterface = new TypeService( typeRepository,exerciseRepository);
+        TypeServiceInterface typeServiceInterface = new TypeService(typeRepository, exerciseRepository);
 
-        TypeEntity typeEntity = new TypeEntity(1,"name");
+        TypeEntity typeEntity = new TypeEntity(1, "name");
 
         TypeDto typeDtoUpdate = new TypeDto("nameUpdate");
 
@@ -96,7 +94,6 @@ public class TypeTests {
 
         TypeEntity typeUpdated = typeServiceInterface.updateType(typeEntity.getId(), typeDtoUpdate);
         assertEquals(typeDtoUpdate.getName(), typeUpdated.getName());
-        // verify(userRepository) ????????
         verify(typeRepository).findById(typeEntity.getId());
 
 
@@ -105,9 +102,9 @@ public class TypeTests {
     @Test
     void shouldDeleteType() {
 
-        TypeService typeServiceInterface = new TypeService( typeRepository,exerciseRepository);
+        TypeServiceInterface typeServiceInterface = new TypeService(typeRepository, exerciseRepository);
 
-        TypeEntity typeEntity = new TypeEntity(1,"name");
+        TypeEntity typeEntity = new TypeEntity(1, "name");
 
 
         when(typeRepository.findById(typeEntity.getId())).thenReturn(Optional.of(typeEntity));

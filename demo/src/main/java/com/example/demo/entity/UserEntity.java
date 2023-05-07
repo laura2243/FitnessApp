@@ -1,17 +1,16 @@
 package com.example.demo.entity;
 import jakarta.persistence.*;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Setter
 @Getter
+@EqualsAndHashCode
 @Table(name = "users" )
 public class UserEntity {
     @Id
@@ -69,6 +68,20 @@ public class UserEntity {
                 ", age=" + age +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(height, that.height) && Objects.equals(kg, that.kg) && Objects.equals(age, that.age) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(role, that.role) && Objects.equals(workouts, that.workouts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, height, kg, age, username, password, role, workouts);
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private RoleEntity role;

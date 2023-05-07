@@ -4,9 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Setter
+@ToString
 @Table(name = "roles")
 public class RoleEntity {
     @Id
