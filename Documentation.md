@@ -137,6 +137,46 @@ The listener (observer) will consume an event of type NewUserEvent, is invoked s
 4. DELETE - *deletes a type resource, if it exists and it is not assigned to any exercise*
 ```public void deleteType(@PathVariable("typeId") Integer typeId)```
 
+# Unit Testing
+For the most part, unit tests are intended to test a small chunk (or unit) of code. That is usually limited to the code within a function or sometimes extends to some helper functions called from that function. If a unit test is testing code that is dependent on another service or resource, like a database or a network resource, the unit test should “mock” and inject that dependency as to have no actual impact on that external resource. It also limits the focus to just that unit being tested
+
+In order to test Service layer components, I mocked the Repository layer components using the Mockito framework. I did't use the database for Unit testing. I used ***Mockito.when()*** methods to create test stubs. 
+Therefor, I have implemented JUnit tests for all the methods from **Service layer** and for the classes that contain additional logic, such as **EmailSenderService**.
+
+**Unit Testing User Service Layer**
+To achieve low coupling I created an ***UserServiceInterface*** with CRUD methods. After this, I created an UserService implementation class that implements the UserServiceInterface.
+***UserTests Class***
+I created a mock of UserRepository using ```@Mock``` and create an EmployeeService instance using the mock EmployeeRepository instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**Unit Testing Authentication Service Layer**
+To achieve low coupling I created an ***AuthServiceInterface*** with CRUD methods. After this, I created an AuthService implementation class that implements the AuthServiceInterface.
+***AuthTests Class***
+I created a mock of UserRepository, RoleRepository, JWTGenerator, PasswordEncoder, AuthenticationManager, ApplicationEventPublisher using ```@Mock``` and created an AuthService instance using the mocks instances. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**Unit Testing Type Service Layer**
+To achieve low coupling I created an ***TypeServiceInterface*** with CRUD methods. After this, I created an TypeService implementation class that implements the TypeServiceInterface.
+***TypeTests Class***
+I created a mock of ExerciseRepository and TypeRepository using ```@Mock``` and created a TypeService instance using the mock TypeRepository and ExerciseRepository instances. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**Unit Testing Exercise Service Layer**
+To achieve low coupling I created an ***ExerciseServiceInterface*** with CRUD methods. After this, I created an ExerciseService implementation class that implements the ExerciseServiceInterface.
+***ExerciseTests Class***
+I created a mock of ExerciseRepository and TypeRepository using ```@Mock``` and created an ExerciseService instance using the mock TypeRepository and ExerciseRepository instances. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+
+***
+**Unit Testing Workout Service Layer**
+To achieve low coupling I created a ***WorkoutServiceInterface*** with CRUD methods. After this, I created a WorkoutService implementation class that implements the WorkoutServiceInterface.
+***WorkoutTests Class***
+I created a mock of WorkoutRepository using ```@Mock``` and create an WorkoutService instance using the mock WorkoutRepository instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**EmailTests Class**
+For testing the EmailSenderService I used **GreenMail**. GreenMail is an open source, intuitive and easy-to-use test suite of email servers for testing purposes. GreenMail responds like a regular SMTP server but does not deliver any email, which enables it to be used in real life applications and real test cases. Messages can easily be extracted, verified and modified. 
+I created a mock of EmailSender using ```@Mock``` and create an Email instance using the mock instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+
+
+
+
+
 
 
 
