@@ -24,4 +24,8 @@ public class ExerciseDto {
         this.age = age;
         this.type = type;
     }
+
+    public ExerciseDto(String name) {
+        this.name = name;
+    }
 }

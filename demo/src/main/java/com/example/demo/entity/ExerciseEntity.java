@@ -76,6 +76,11 @@ public class ExerciseEntity {
     public ExerciseEntity() {
     }
 
+    public ExerciseEntity(String name) {
+
+        this.name = name;
+    }
+
     @JsonBackReference
     public TypeEntity getType() {
         return type;

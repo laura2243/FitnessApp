@@ -122,6 +122,8 @@ public class ExerciseService implements ExerciseServiceInterface {
                 exerciseDto.getAge(),exerciseDto.getType());
 
 
+
+
         exerciseRepository.saveAndFlush(exerciseEntity);
 
         //return new ResponseEntity<>("Exercise added successfully!", HttpStatus.OK);
