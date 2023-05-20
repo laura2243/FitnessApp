@@ -104,38 +104,80 @@ The listener (observer) will consume an event of type NewUserEvent, is invoked s
 **User Endpoints**
 
 1. PUT - *updates an user data in database, if it exists and its username and email are not already taken.*
- - ```public  void updateUser( @PathVariable("userId") Integer userId, @RequestBody RegisterDto userEntity)```
+```public  void updateUser( @PathVariable("userId") Integer userId, @RequestBody RegisterDto userEntity)```
 2. DELETE - *deletes a user from the database and its account, if it exists.*
- - ```public void deleteUser(@PathVariable("userId") Integer userId)```
+```public void deleteUser(@PathVariable("userId") Integer userId)```
 3. GET - *finds all the users present in the database and returns them.*
- - ```public List<UserEntity> getUser()```
+```public List<UserEntity> getUser()```
 
 **Authentication and registration Endpoints**
 1. (POST) REGISTER - *registers a new user in the application if the account doesn't exist*
- - ```public ResponseEntity<String> register(@RequestBody RegisterDto registerDto)```
+```public ResponseEntity<String> register(@RequestBody RegisterDto registerDto)```
 2. (POST) LOGIN - *login of a user that already has an account in the application*
- - ```public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto)```
+```public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto)```
 
 **Exercise Endpoints**
 1. POST - *adds a new exercise in the application if its name is not already taken*
- - ```public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto)```
+```public ResponseEntity<String> addExercise(@RequestBody ExerciseDto exerciseDto)```
 2. GET - *finds all the exercises present in the database and returns them.*
- - ```public List<ExerciseEntity> getExercises()```
+ ```public List<ExerciseEntity> getExercises()```
 3. PUT - *updates an exercise's fields, if it exists*
- - ```public void updateExercise(@PathVariable("exerciseId") Integer exerciseId, @RequestBody ExerciseDto exerciseDto) ```
+```public void updateExercise(@PathVariable("exerciseId") Integer exerciseId, @RequestBody ExerciseDto exerciseDto) ```
 4. DELETE - *deletes an exercise resource, if it exists*
- - ```public void deleteExercise(@PathVariable("exerciseId") Integer exerciseId)```
+```public void deleteExercise(@PathVariable("exerciseId") Integer exerciseId)```
 
 **Type Endpoints**
 
 1. POST - *adds a new type in the application if its name is not already taken*
- -  ```public ResponseEntity<String> addType(@RequestBody TypeDto typeDto)```
+ ```public ResponseEntity<String> addType(@RequestBody TypeDto typeDto)```
 2. PUT - *updates a type's fields, if it exists.*
- - ``` public void updateType(@PathVariable("typeId") Integer typeId, @RequestBody TypeDto typeDto)```
+``` public void updateType(@PathVariable("typeId") Integer typeId, @RequestBody TypeDto typeDto)```
 3. GET - *finds all the types present in the database and returns them.*
- - ```public List<TypeEntity> getType() ```
+```public List<TypeEntity> getType() ```
 4. DELETE - *deletes a type resource, if it exists and it is not assigned to any exercise*
-- ```public void deleteType(@PathVariable("typeId") Integer typeId)```
+```public void deleteType(@PathVariable("typeId") Integer typeId)```
+
+# Unit Testing
+For the most part, unit tests are intended to test a small chunk (or unit) of code. That is usually limited to the code within a function or sometimes extends to some helper functions called from that function. If a unit test is testing code that is dependent on another service or resource, like a database or a network resource, the unit test should “mock” and inject that dependency as to have no actual impact on that external resource. It also limits the focus to just that unit being tested
+
+In order to test Service layer components, I mocked the Repository layer components using the Mockito framework. I did't use the database for Unit testing. I used ***Mockito.when()*** methods to create test stubs. 
+Therefor, I have implemented JUnit tests for all the methods from **Service layer** and for the classes that contain additional logic, such as **EmailSenderService**.
+
+**Unit Testing User Service Layer**
+To achieve low coupling I created an ***UserServiceInterface*** with CRUD methods. After this, I created an UserService implementation class that implements the UserServiceInterface.
+***UserTests Class***
+I created a mock of UserRepository using ```@Mock``` and create an EmployeeService instance using the mock EmployeeRepository instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**Unit Testing Authentication Service Layer**
+To achieve low coupling I created an ***AuthServiceInterface*** with CRUD methods. After this, I created an AuthService implementation class that implements the AuthServiceInterface.
+***AuthTests Class***
+I created a mock of UserRepository, RoleRepository, JWTGenerator, PasswordEncoder, AuthenticationManager, ApplicationEventPublisher using ```@Mock``` and created an AuthService instance using the mocks instances. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**Unit Testing Type Service Layer**
+To achieve low coupling I created an ***TypeServiceInterface*** with CRUD methods. After this, I created an TypeService implementation class that implements the TypeServiceInterface.
+***TypeTests Class***
+I created a mock of ExerciseRepository and TypeRepository using ```@Mock``` and created a TypeService instance using the mock TypeRepository and ExerciseRepository instances. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**Unit Testing Exercise Service Layer**
+To achieve low coupling I created an ***ExerciseServiceInterface*** with CRUD methods. After this, I created an ExerciseService implementation class that implements the ExerciseServiceInterface.
+***ExerciseTests Class***
+I created a mock of ExerciseRepository and TypeRepository using ```@Mock``` and created an ExerciseService instance using the mock TypeRepository and ExerciseRepository instances. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+
+***
+**Unit Testing Workout Service Layer**
+To achieve low coupling I created a ***WorkoutServiceInterface*** with CRUD methods. After this, I created a WorkoutService implementation class that implements the WorkoutServiceInterface.
+***WorkoutTests Class***
+I created a mock of WorkoutRepository using ```@Mock``` and create an WorkoutService instance using the mock WorkoutRepository instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+***
+**EmailTests Class**
+For testing the EmailSenderService I used **GreenMail**. GreenMail is an open source, intuitive and easy-to-use test suite of email servers for testing purposes. GreenMail responds like a regular SMTP server but does not deliver any email, which enables it to be used in real life applications and real test cases. Messages can easily be extracted, verified and modified. 
+I created a mock of EmailSender using ```@Mock``` and create an Email instance using the mock instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
+- JUnit is loading the Spring context as instructed by the ```@ContextConfiguration``` annotation pointing to the Java Configuration class.
+- The ```@Resource``` annotation is autowiring the bean dependency directly on our test conveniently having it initialised during the test runtime.
+- We have an init() activity marked by JUnit’s ```@Before``` annotation where we instantiate our GreenMail mail server and changing the port of our email service to a test one.
+- The test method itself is a simple manner of initialising a test ```SimpleMailMessage``` and sending it via our email service that gets intercepted by GreenMail and further queried upon concerning the data received.
+- A cleanup functionality is closing the resourced during the ```@After``` JUnit instructed method.
+
 
 
 
