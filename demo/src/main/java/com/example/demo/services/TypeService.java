@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,9 +42,11 @@ public class TypeService implements TypeServiceInterface {
         TypeEntity typeName = typeRepository.findById(typeId).orElseThrow(()->
                 new IllegalStateException("type with id" + typeId + "does not exists"));
 
-        Optional<ExerciseEntity> existsInExercise = exerciseRepository.findExerciseEntitiesByType(typeName);
 
-        if (existsInExercise.isPresent()) {
+        List<ExerciseEntity> existsInExercise = new ArrayList<>();
+        existsInExercise = exerciseRepository.findExerciseEntitiesByType(typeName);
+
+        if (existsInExercise != null && existsInExercise.size() > 0 ) {
 
 
             throw new IllegalStateException("type with id " + typeId + " is present in an exercise!");

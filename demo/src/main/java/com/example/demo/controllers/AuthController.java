@@ -9,15 +9,17 @@ import com.example.demo.security.JWTGenerator;
 import com.example.demo.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 /**
  * The class that is responsible for processing incoming REST API requests for login and register, converts
@@ -44,6 +46,7 @@ public class AuthController {
      * method that handles the api call for login
      * it calls the method from the service package
      */
+    @CrossOrigin
     @PostMapping("login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
        return authService.login(loginDto);
@@ -55,6 +58,7 @@ public class AuthController {
      * method that handles the api call for register
      * it calls the method from the service package
      */
+    @CrossOrigin
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 

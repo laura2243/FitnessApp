@@ -1,0 +1,1445 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/v1/user/{userId}": {
+      "put": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/type/{typeId}": {
+      "put": {
+        "tags": [
+          "type-controller"
+        ],
+        "operationId": "updateType",
+        "parameters": [
+          {
+            "name": "typeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TypeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "type-controller"
+        ],
+        "operationId": "deleteType",
+        "parameters": [
+          {
+            "name": "typeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/exercise/{exerciseId}": {
+      "put": {
+        "tags": [
+          "exercise-controller"
+        ],
+        "operationId": "updateExercise",
+        "parameters": [
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExerciseDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "exercise-controller"
+        ],
+        "operationId": "deleteExercise",
+        "parameters": [
+          {
+            "name": "exerciseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/workout/addWorkout": {
+      "post": {
+        "tags": [
+          "workout-controller"
+        ],
+        "operationId": "addWorkout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/type/addType": {
+      "post": {
+        "tags": [
+          "type-controller"
+        ],
+        "operationId": "addType",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TypeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/exercise": {
+      "get": {
+        "tags": [
+          "exercise-controller"
+        ],
+        "operationId": "getExercises",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExerciseEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "exercise-controller"
+        ],
+        "operationId": "addExercise",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExerciseDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workout": {
+      "get": {
+        "tags": [
+          "workout-controller"
+        ],
+        "operationId": "getWorkouts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkoutEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/type": {
+      "get": {
+        "tags": [
+          "type-controller"
+        ],
+        "operationId": "getType",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TypeEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/workout/{workoutId}": {
+      "delete": {
+        "tags": [
+          "workout-controller"
+        ],
+        "operationId": "deleteWorkout",
+        "parameters": [
+          {
+            "name": "workoutId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ex": {
+      "get": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet_3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet_2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet_5",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet_6",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "exemple"
+        ],
+        "operationId": "greet_4",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TypeDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ExerciseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeEntity"
+          }
+        }
+      },
+      "ExerciseEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workout": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkoutEntity"
+            }
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeEntity"
+          }
+        }
+      },
+      "TypeEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExerciseEntity"
+            }
+          },
+          "workouts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkoutEntity"
+            }
+          }
+        }
+      },
+      "WorkoutEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "date_start": {
+            "type": "object",
+            "properties": {
+              "calendar": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "numberFormat": {
+                "type": "object",
+                "properties": {
+                  "groupingUsed": {
+                    "type": "boolean"
+                  },
+                  "parseIntegerOnly": {
+                    "type": "boolean"
+                  },
+                  "maximumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "maximumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "currency": {
+                    "type": "object",
+                    "properties": {
+                      "currencyCode": {
+                        "type": "string"
+                      },
+                      "defaultFractionDigits": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "numericCode": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "displayName": {
+                        "type": "string"
+                      },
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "numericCodeAsString": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "roundingMode": {
+                    "type": "string",
+                    "enum": [
+                      "UP",
+                      "DOWN",
+                      "CEILING",
+                      "FLOOR",
+                      "HALF_UP",
+                      "HALF_DOWN",
+                      "HALF_EVEN",
+                      "UNNECESSARY"
+                    ]
+                  }
+                }
+              },
+              "get2DigitYearStart": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dateFormatSymbols": {
+                "type": "object",
+                "properties": {
+                  "eras": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "months": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortMonths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "weekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortWeekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "zoneStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "localPatternChars": {
+                    "type": "string"
+                  },
+                  "amPmStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "timeZone": {
+                "type": "object",
+                "properties": {
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "dstsavings": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "rawOffset": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "lenient": {
+                "type": "boolean"
+              }
+            }
+          },
+          "date_finish": {
+            "type": "object",
+            "properties": {
+              "calendar": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "numberFormat": {
+                "type": "object",
+                "properties": {
+                  "groupingUsed": {
+                    "type": "boolean"
+                  },
+                  "parseIntegerOnly": {
+                    "type": "boolean"
+                  },
+                  "maximumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "maximumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "currency": {
+                    "type": "object",
+                    "properties": {
+                      "currencyCode": {
+                        "type": "string"
+                      },
+                      "defaultFractionDigits": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "numericCode": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "displayName": {
+                        "type": "string"
+                      },
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "numericCodeAsString": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "roundingMode": {
+                    "type": "string",
+                    "enum": [
+                      "UP",
+                      "DOWN",
+                      "CEILING",
+                      "FLOOR",
+                      "HALF_UP",
+                      "HALF_DOWN",
+                      "HALF_EVEN",
+                      "UNNECESSARY"
+                    ]
+                  }
+                }
+              },
+              "get2DigitYearStart": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dateFormatSymbols": {
+                "type": "object",
+                "properties": {
+                  "eras": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "months": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortMonths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "weekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortWeekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "zoneStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "localPatternChars": {
+                    "type": "string"
+                  },
+                  "amPmStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "timeZone": {
+                "type": "object",
+                "properties": {
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "dstsavings": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "rawOffset": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "lenient": {
+                "type": "boolean"
+              }
+            }
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeEntity"
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExerciseEntity"
+            }
+          }
+        }
+      },
+      "WorkoutDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "date_start": {
+            "type": "object",
+            "properties": {
+              "calendar": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "numberFormat": {
+                "type": "object",
+                "properties": {
+                  "groupingUsed": {
+                    "type": "boolean"
+                  },
+                  "parseIntegerOnly": {
+                    "type": "boolean"
+                  },
+                  "maximumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "maximumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "currency": {
+                    "type": "object",
+                    "properties": {
+                      "currencyCode": {
+                        "type": "string"
+                      },
+                      "defaultFractionDigits": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "numericCode": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "displayName": {
+                        "type": "string"
+                      },
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "numericCodeAsString": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "roundingMode": {
+                    "type": "string",
+                    "enum": [
+                      "UP",
+                      "DOWN",
+                      "CEILING",
+                      "FLOOR",
+                      "HALF_UP",
+                      "HALF_DOWN",
+                      "HALF_EVEN",
+                      "UNNECESSARY"
+                    ]
+                  }
+                }
+              },
+              "get2DigitYearStart": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dateFormatSymbols": {
+                "type": "object",
+                "properties": {
+                  "eras": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "months": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortMonths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "weekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortWeekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "zoneStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "localPatternChars": {
+                    "type": "string"
+                  },
+                  "amPmStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "timeZone": {
+                "type": "object",
+                "properties": {
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "dstsavings": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "rawOffset": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "lenient": {
+                "type": "boolean"
+              }
+            }
+          },
+          "date_finish": {
+            "type": "object",
+            "properties": {
+              "calendar": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "numberFormat": {
+                "type": "object",
+                "properties": {
+                  "groupingUsed": {
+                    "type": "boolean"
+                  },
+                  "parseIntegerOnly": {
+                    "type": "boolean"
+                  },
+                  "maximumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumIntegerDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "maximumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minimumFractionDigits": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "currency": {
+                    "type": "object",
+                    "properties": {
+                      "currencyCode": {
+                        "type": "string"
+                      },
+                      "defaultFractionDigits": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "numericCode": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "displayName": {
+                        "type": "string"
+                      },
+                      "symbol": {
+                        "type": "string"
+                      },
+                      "numericCodeAsString": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "roundingMode": {
+                    "type": "string",
+                    "enum": [
+                      "UP",
+                      "DOWN",
+                      "CEILING",
+                      "FLOOR",
+                      "HALF_UP",
+                      "HALF_DOWN",
+                      "HALF_EVEN",
+                      "UNNECESSARY"
+                    ]
+                  }
+                }
+              },
+              "get2DigitYearStart": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dateFormatSymbols": {
+                "type": "object",
+                "properties": {
+                  "eras": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "months": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortMonths": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "weekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shortWeekdays": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "zoneStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "localPatternChars": {
+                    "type": "string"
+                  },
+                  "amPmStrings": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "timeZone": {
+                "type": "object",
+                "properties": {
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "dstsavings": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "rawOffset": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "lenient": {
+                "type": "boolean"
+              }
+            }
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeEntity"
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExerciseEntity"
+            }
+          }
+        }
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "tokenType": {
+            "type": "string"
+          }
+        }
+      },
+      "RoleEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "writeOnly": true
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UserEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kg": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/RoleEntity"
+          },
+          "workouts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkoutEntity"
+            }
+          }
+        }
+      }
+    }
+  }
+}

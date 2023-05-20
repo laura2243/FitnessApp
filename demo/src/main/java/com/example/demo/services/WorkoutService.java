@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
 
+import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.WorkoutDto;
+import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.WorkoutEntity;
 import com.example.demo.interfaceService.WorkoutServiceInterface;
 import com.example.demo.repository.WorkoutRepository;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -74,4 +77,8 @@ public class WorkoutService implements WorkoutServiceInterface {
         return new ResponseEntity<>("Workout added successfully!", HttpStatus.OK);
     }
 
-}
+
+
+
+
+    }

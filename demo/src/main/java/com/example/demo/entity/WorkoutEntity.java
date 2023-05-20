@@ -4,6 +4,7 @@ package com.example.demo.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,13 +21,17 @@ public class WorkoutEntity {
     private Integer id;
 
     private String name;
-    private SimpleDateFormat date_start;
-    private SimpleDateFormat date_finish;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date_start;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date_finish;
     private Integer duration;
 
 
 
-    public WorkoutEntity( String name, SimpleDateFormat date_start, SimpleDateFormat date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
+    public WorkoutEntity( String name, Date date_start, Date date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
         this.name = name;
         this.date_start = date_start;
         this.date_finish = date_finish;
@@ -35,7 +40,7 @@ public class WorkoutEntity {
         this.exercises = exercises;
     }
 
-    public WorkoutEntity(Integer id, String name, SimpleDateFormat date_start, SimpleDateFormat date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
+    public WorkoutEntity(Integer id, String name, Date date_start, Date date_finish, Integer duration, TypeEntity type, List<ExerciseEntity> exercises) {
         this.id = id;
         this.name = name;
         this.date_start = date_start;

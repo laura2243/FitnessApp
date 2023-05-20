@@ -89,6 +89,7 @@ public class ExerciseEntity {
     private TypeEntity type;
 
 
+
 //    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
 //    @JoinColumn(name = "workoutID",referencedColumnName = "id")
 //    private WorkoutEntity workout;

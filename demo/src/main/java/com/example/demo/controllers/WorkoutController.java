@@ -30,6 +30,7 @@ public class WorkoutController {
      * method that handles the api call for returning all workouts
      * it calls the method from the service package
      */
+    @CrossOrigin
     @GetMapping
     public List<WorkoutEntity> getWorkouts() {
         return workoutService.getWorkouts();
@@ -39,6 +40,7 @@ public class WorkoutController {
      * method that handles the api call for deleting a workout
      * it calls the method from the service package
      */
+    @CrossOrigin
     @DeleteMapping(path = "{workoutId}")
     public void deleteWorkout(@PathVariable("workoutId") Integer workoutId) {
         workoutService.deleteWorkout(workoutId);
@@ -50,6 +52,7 @@ public class WorkoutController {
      * method that handles the api call for adding a workout
      * it calls the method from the service package
      */
+    @CrossOrigin
     @PostMapping("addWorkout")
     public ResponseEntity<String> addWorkout(@RequestBody WorkoutDto workoutDto) {
 

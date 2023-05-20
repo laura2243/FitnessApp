@@ -36,6 +36,8 @@ public class SecurityConfig {
         this.authEntryPoint = authEntryPoint;
     }
 
+
+
     /**
      * Method which integrates a builder pattern that is going to build the actual security chain
      * It establishes the URLs' pattern that the filter will be applied on,
@@ -48,6 +50,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint)
@@ -57,9 +60,16 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/**").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                .requestMatchers("http://localhost:4200/index").permitAll()
+               .requestMatchers("http://localhost:4200").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
+
+
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();

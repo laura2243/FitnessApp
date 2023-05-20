@@ -14,6 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
+/**
+ interface used for low coupling for AuthService
+ it contains the methods from mservice */
 public interface AuthServiceInterface {
 
    ResponseEntity<String> register(RegisterDto registerDto) ;

@@ -16,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -42,7 +39,7 @@ public class WorkoutTests {
 
         List<ExerciseEntity> exercises = new ArrayList<ExerciseEntity>();
         exercises.add(new ExerciseEntity("name", "description", 5, 5, 5, 5));
-        SimpleDateFormat dateStart = new SimpleDateFormat("2002-01-01");
+        Date dateStart = new Date("2002-01-01");
 
         WorkoutDto workoutDto = new WorkoutDto("name", dateStart, dateStart, 10, new TypeEntity("type"),
                 exercises);
@@ -69,7 +66,7 @@ public class WorkoutTests {
 
         List<ExerciseEntity> exercises = new ArrayList<ExerciseEntity>();
         exercises.add(new ExerciseEntity("name", "description", 5, 5, 5, 5));
-        SimpleDateFormat dateStart = new SimpleDateFormat("2002-01-01");
+        Date dateStart = new Date("2002-01-01");
 
         WorkoutEntity workoutEntity = new WorkoutEntity("name", dateStart, dateStart, 10, new TypeEntity("type"),
                 exercises);
@@ -96,7 +93,7 @@ public class WorkoutTests {
 
         List<ExerciseEntity> exercises = new ArrayList<ExerciseEntity>();
         exercises.add(new ExerciseEntity("name", "description", 5, 5, 5, 5));
-        SimpleDateFormat dateStart = new SimpleDateFormat("2002-01-01");
+        Date dateStart = new Date("2002-01-01");
 
         WorkoutEntity workoutEntity = new WorkoutEntity(1, "name", dateStart, dateStart, 10, new TypeEntity("type"),
                 exercises);

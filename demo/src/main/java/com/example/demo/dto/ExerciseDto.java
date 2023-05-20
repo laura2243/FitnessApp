@@ -2,8 +2,10 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.TypeEntity;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class ExerciseDto {
     private String name;
     private String description;

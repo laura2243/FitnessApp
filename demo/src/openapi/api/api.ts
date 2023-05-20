@@ -1,0 +1,13 @@
+export * from './authController.service';
+import { AuthControllerService } from './authController.service';
+export * from './exemple.service';
+import { ExempleService } from './exemple.service';
+export * from './exerciseController.service';
+import { ExerciseControllerService } from './exerciseController.service';
+export * from './typeController.service';
+import { TypeControllerService } from './typeController.service';
+export * from './userController.service';
+import { UserControllerService } from './userController.service';
+export * from './workoutController.service';
+import { WorkoutControllerService } from './workoutController.service';
+export const APIS = [AuthControllerService, ExempleService, ExerciseControllerService, TypeControllerService, UserControllerService, WorkoutControllerService];
