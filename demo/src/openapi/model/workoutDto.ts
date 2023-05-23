@@ -10,14 +10,13 @@
  * Do not edit the class manually.
  */
 import { TypeEntity } from './typeEntity';
-import { WorkoutEntityDateStart } from './workoutEntityDateStart';
 import { ExerciseEntity } from './exerciseEntity';
 
 
 export interface WorkoutDto { 
     name?: string;
-    date_start?: WorkoutEntityDateStart;
-    date_finish?: WorkoutEntityDateStart;
+    date_start?: string;
+    date_finish?: string;
     duration?: number;
     type?: TypeEntity;
     exercises?: Array<ExerciseEntity>;

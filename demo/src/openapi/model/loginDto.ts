@@ -9,10 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { RoleEntity } from './roleEntity';
 
 
 export interface LoginDto { 
     username?: string;
     password?: string;
+    role?: RoleEntity;
 }
 

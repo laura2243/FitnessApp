@@ -8,24 +8,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ExerciseDto {
     private String name;
-    private String description;
-    private Integer duration;
-    private Integer height;
-    private Integer kg;
-    private Integer age;
     private TypeEntity type;
+    private String gifUrl;
 
-    public ExerciseDto(String name, String description, Integer duration, Integer height, Integer kg, Integer age, TypeEntity type) {
+    public ExerciseDto(String name, TypeEntity type) {
         this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.height = height;
-        this.kg = kg;
-        this.age = age;
         this.type = type;
     }
 
     public ExerciseDto(String name) {
         this.name = name;
+    }
+
+    public ExerciseDto(String name, TypeEntity type, String gifUrl) {
+        this.name = name;
+        this.type = type;
+        this.gifUrl = gifUrl;
     }
 }

@@ -48,7 +48,7 @@ public class AuthController {
      */
     @CrossOrigin
     @PostMapping("login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto) {
+    public LoginDto login(@RequestBody LoginDto loginDto) {
        return authService.login(loginDto);
 
     }

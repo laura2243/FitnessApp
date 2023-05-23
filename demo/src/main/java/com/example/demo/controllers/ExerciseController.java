@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.dto.ExerciseDto;
 import com.example.demo.dto.RegisterDto;
+import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.ExerciseEntity;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.interfaceService.ExerciseServiceInterface;
@@ -64,6 +65,12 @@ public class ExerciseController {
     public ExerciseEntity addExercise(@RequestBody ExerciseDto exerciseDto) {
 
         return exerciseService.addExercise(exerciseDto);
+    }
+
+
+    @GetMapping    (path="getExercisesByType")
+    public List<ExerciseEntity> getExerciseByType(@RequestBody TypeDto typeDto) {
+        return exerciseService.getExercisesByType(typeDto);
     }
 
 

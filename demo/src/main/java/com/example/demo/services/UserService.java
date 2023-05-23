@@ -35,10 +35,11 @@ public class UserService implements UserServiceInterface {
      * if the user deleted successfully it modifies the database otherwise
      * a message that the user does not exist
      */
-    public ResponseEntity<String> deleteUser(Integer userId) {
-        userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + " does not exist"));
+    @Transactional
+    public ResponseEntity<String> deleteUser(String userUsername) {
+        userRepository.findUserEntityByUsername(userUsername).orElseThrow(() -> new IllegalStateException("user with id " + userUsername + " does not exist"));
 
-        userRepository.deleteById(userId);
+        userRepository.deleteUserEntityByUsername(userUsername);
        return new ResponseEntity<>("User deleted successfully!", HttpStatus.OK);
     }
 

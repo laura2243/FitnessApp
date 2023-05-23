@@ -1,6 +1,7 @@
 package com.example.demo.interfaceService;
 
 import com.example.demo.dto.ExerciseDto;
+import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.ExerciseEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -16,5 +17,7 @@ public interface ExerciseServiceInterface {
 
 
     ExerciseEntity addExercise(ExerciseDto exerciseDto);
+
+    List<ExerciseEntity> getExercisesByType(TypeDto typeDto);
 
 }

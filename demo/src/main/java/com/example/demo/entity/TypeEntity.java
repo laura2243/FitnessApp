@@ -14,7 +14,7 @@ import java.util.Set;
 public class TypeEntity {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
@@ -34,7 +34,7 @@ public class TypeEntity {
         this.id = id;
         this.name = name;
         this.exercises = exercises;
-        this.workouts = workouts;
+        //this.workouts = workouts;
     }
 
     public TypeEntity(Integer id) {
@@ -52,10 +52,11 @@ public class TypeEntity {
     }
 
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "type")
+    @JsonBackReference
     private List<ExerciseEntity> exercises;
 
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "type")
-    private List<WorkoutEntity> workouts;
+//    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "type")
+//    private List<WorkoutEntity> workouts;
 
     @Override
     public String toString() {
@@ -63,7 +64,7 @@ public class TypeEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", exercises=" + exercises +
-                ", workouts=" + workouts +
+               // ", workouts=" + workouts +
                 '}';
     }
 }

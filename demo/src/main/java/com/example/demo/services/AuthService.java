@@ -76,6 +76,7 @@ public class AuthService implements AuthServiceInterface {
 
         UserEntity userEntity = new UserEntity(registerDto.getName(), registerDto.getEmail(), registerDto.getHeight(), registerDto.getKg(), registerDto.getAge(), registerDto.getUsername(), passwordEncoder.encode(registerDto.getPassword()));
 
+        System.out.println(userEntity);
         RoleEntity roles = roleRepository.findByName("USER").get();
         userEntity.setRole(roles);
 
@@ -99,7 +100,7 @@ public class AuthService implements AuthServiceInterface {
      * @param loginDto
      * @return AuthResponseDto
      */
-    public ResponseEntity<AuthResponseDto> login(LoginDto loginDto) {
+    public LoginDto login(LoginDto loginDto) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
@@ -108,9 +109,11 @@ public class AuthService implements AuthServiceInterface {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         Optional<UserEntity> userEntity = userRepository.findUserByUsername(loginDto.getUsername());
 
+        RoleEntity roles = roleRepository.findByName("USER").get();
+        loginDto.setRole(roles);
 
         if (userEntity.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return loginDto ;
         } else throw new IllegalStateException("Account doesn't exist!");
         //String token = jwtGenerator.generateToken(authentication);
         // return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);

@@ -37,9 +37,9 @@ public class UserController {
      * method that handles the api call for deleting a user
      * it calls the method from the service package
      */
-    @DeleteMapping(path = "{userId}")
-    public void deleteUser(@PathVariable("userId") Integer userId){
-        userService.deleteUser(userId);
+    @DeleteMapping
+    public void deleteUser(@RequestParam("username") String username){
+        userService.deleteUser(username);
     }
 
 

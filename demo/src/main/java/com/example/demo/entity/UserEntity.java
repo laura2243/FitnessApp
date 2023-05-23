@@ -86,10 +86,15 @@ public class UserEntity {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private RoleEntity role;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "userWorkout",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "workout_id"))
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "userWorkout",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "workout_id"))
+//    private List<WorkoutEntity> workouts = new ArrayList<>();
+
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE,mappedBy = "user")
+
     private List<WorkoutEntity> workouts = new ArrayList<>();
 
 }

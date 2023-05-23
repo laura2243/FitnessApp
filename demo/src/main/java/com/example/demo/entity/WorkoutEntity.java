@@ -36,7 +36,7 @@ public class WorkoutEntity {
         this.date_start = date_start;
         this.date_finish = date_finish;
         this.duration = duration;
-        this.type = type;
+
         this.exercises = exercises;
     }
 
@@ -46,7 +46,16 @@ public class WorkoutEntity {
         this.date_start = date_start;
         this.date_finish = date_finish;
         this.duration = duration;
-        this.type = type;
+
+        this.exercises = exercises;
+    }
+
+    public WorkoutEntity( String name, Date date_start, Date date_finish, Integer duration, List<ExerciseEntity> exercises) {
+
+        this.name = name;
+        this.date_start = date_start;
+        this.date_finish = date_finish;
+        this.duration = duration;
         this.exercises = exercises;
     }
 
@@ -61,14 +70,14 @@ public class WorkoutEntity {
         this.exercises = exercises;
     }
 
-    @JsonBackReference
-    public TypeEntity getType() {
-        return type;
-    }
+//    @JsonBackReference
+//    public TypeEntity getType() {
+//        return type;
+//    }
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "typeID",referencedColumnName = "id")
-    private TypeEntity type;
+//    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "typeID",referencedColumnName = "id")
+//    private TypeEntity type;
 
 //    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "workout")
 //    private List<ExerciseEntity> exercises;
@@ -81,6 +90,12 @@ public class WorkoutEntity {
             inverseJoinColumns = @JoinColumn(name = "exercise_id"))
     List<ExerciseEntity> exercises;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
+    private UserEntity user;
+
     @Override
     public String toString() {
         return "WorkoutEntity{" +
@@ -89,7 +104,7 @@ public class WorkoutEntity {
                 ", date_start=" + date_start +
                 ", date_finish=" + date_finish +
                 ", duration=" + duration +
-                ", type=" + type +
+
                 ", exercises=" + exercises +
                 '}';
     }

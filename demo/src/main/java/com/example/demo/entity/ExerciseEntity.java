@@ -16,60 +16,41 @@ public class ExerciseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
-    private String description;
-    private Integer duration;
-    private Integer height;
-    private Integer kg;
-    private Integer age;
+    private String gifUrl;
+
+
 
     @ManyToMany
     private List<WorkoutEntity> workout;
 
 
-    public ExerciseEntity( String name, String description, Integer duration, Integer height, Integer kg, Integer age) {
-        this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.height = height;
-        this.kg = kg;
-        this.age = age;
-    }
 
-    public ExerciseEntity( String name, String description, Integer duration, Integer height, Integer kg, Integer age, TypeEntity type) {
+
+    public ExerciseEntity( String name, TypeEntity type) {
 
         this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.height = height;
-        this.kg = kg;
-        this.age = age;
         this.type = type;
     }
 
-
-
-    public ExerciseEntity(Integer id, String name, String description, Integer duration, Integer height, Integer kg, Integer age, List<WorkoutEntity> workout, TypeEntity type) {
+    public ExerciseEntity(Integer id, String gifUrl, String name, List<WorkoutEntity> workout, TypeEntity type) {
         this.id = id;
+        this.gifUrl = gifUrl;
         this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.height = height;
-        this.kg = kg;
-        this.age = age;
         this.workout = workout;
         this.type = type;
     }
 
-    public ExerciseEntity(Integer id, String name, String description, Integer duration, Integer height, Integer kg, Integer age, TypeEntity type) {
+    public ExerciseEntity(Integer id, String name, List<WorkoutEntity> workout, TypeEntity type) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.duration = duration;
-        this.height = height;
-        this.kg = kg;
-        this.age = age;
+        this.workout = workout;
+        this.type = type;
+    }
+
+    public ExerciseEntity(Integer id, String name,  TypeEntity type) {
+        this.id = id;
+        this.name = name;
         this.type = type;
     }
 
@@ -81,7 +62,23 @@ public class ExerciseEntity {
         this.name = name;
     }
 
-    @JsonBackReference
+    public ExerciseEntity(String name, String gifUrl, List<WorkoutEntity> workout, TypeEntity type) {
+        this.name = name;
+        this.gifUrl = gifUrl;
+        this.workout = workout;
+        this.type = type;
+    }
+
+    public ExerciseEntity(String name, String gifUrl,  TypeEntity type) {
+        this.name = name;
+        this.gifUrl = gifUrl;
+        this.workout = workout;
+        this.type = type;
+    }
+
+
+
+//    @JsonBackReference
     public TypeEntity getType() {
         return type;
     }

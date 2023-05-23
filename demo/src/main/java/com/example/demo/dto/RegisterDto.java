@@ -21,4 +21,7 @@ public class RegisterDto {
         this.kg = kg;
         this.age = age;
     }
+
+    public RegisterDto() {
+    }
 }

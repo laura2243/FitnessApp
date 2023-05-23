@@ -15,10 +15,14 @@ import java.util.Optional;
  */
 @Repository
 public interface ExerciseRepository extends JpaRepository<ExerciseEntity,Integer> {
-    Optional<ExerciseEntity> findUserByName(String name);
+    Optional<ExerciseEntity> findExerciseEntityByName(String name);
 
     @Query("SELECT t FROM ExerciseEntity t where t.type = ?1")
     Optional<ExerciseEntity> findTypeInExercise (String type);
 
     List<ExerciseEntity> findExerciseEntitiesByType(TypeEntity type);
+
+    List<ExerciseEntity> findExerciseEntitiesByName(String name);
+
+    List<ExerciseEntity> findExerciseEntityByTypeName(String typeName);
 }

@@ -41,9 +41,9 @@ public class WorkoutController {
      * it calls the method from the service package
      */
     @CrossOrigin
-    @DeleteMapping(path = "{workoutId}")
-    public void deleteWorkout(@PathVariable("workoutId") Integer workoutId) {
-        workoutService.deleteWorkout(workoutId);
+    @DeleteMapping("delete")
+    public void deleteWorkout(String workoutName) {
+        workoutService.deleteWorkout(workoutName);
     }
 
 
@@ -55,9 +55,20 @@ public class WorkoutController {
     @CrossOrigin
     @PostMapping("addWorkout")
     public ResponseEntity<String> addWorkout(@RequestBody WorkoutDto workoutDto) {
-
         return workoutService.addWorkout(workoutDto);
     }
+
+
+
+    @CrossOrigin
+    @GetMapping("getWorkoutByName")
+    public WorkoutEntity getWorkoutByName(String name) {
+        String typet = "ceva ";
+        typet += workoutService.getWorkoutByName(name).getExercises().get(0).getType().getName();
+        System.out.println(typet);
+        return workoutService.getWorkoutByName(name);
+    }
+
 
 
 

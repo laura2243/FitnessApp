@@ -69,7 +69,7 @@ public class TypeService implements TypeServiceInterface {
         TypeEntity typeEntity = typeRepository.findById(typeId).orElseThrow(() -> new IllegalStateException("type with id " + typeId + " does not exist"));
 
         if (newType.getName() != null && newType.getName().length() > 0 && !Objects.equals(newType.getName(), typeEntity.getName())) {
-            Optional<TypeEntity> typeOptional = typeRepository.findUserByName(newType.getName());
+            Optional<TypeEntity> typeOptional = typeRepository.findTypeEntityByName(newType.getName());
 
             if (typeOptional.isPresent()) {
                 throw new IllegalStateException("name taken");
@@ -95,7 +95,7 @@ public class TypeService implements TypeServiceInterface {
      * @return ResponseEntity<String>
      */
     public ResponseEntity<String> addType(TypeDto typeDto) {
-        Optional<TypeEntity> typeOptionalName = typeRepository.findUserByName(typeDto.getName());
+        Optional<TypeEntity> typeOptionalName = typeRepository.findTypeEntityByName(typeDto.getName());
         if (typeOptionalName.isPresent()) {
 
             return new ResponseEntity<>("Type name already taken!", HttpStatus.BAD_REQUEST);

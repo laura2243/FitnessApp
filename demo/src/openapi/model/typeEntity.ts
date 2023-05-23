@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { WorkoutEntity } from './workoutEntity';
 import { ExerciseEntity } from './exerciseEntity';
 
 
@@ -17,6 +16,5 @@ export interface TypeEntity {
     id?: number;
     name?: string;
     exercises?: Array<ExerciseEntity>;
-    workouts?: Array<WorkoutEntity>;
 }
 

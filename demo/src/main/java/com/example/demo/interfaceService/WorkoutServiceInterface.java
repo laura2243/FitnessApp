@@ -11,7 +11,11 @@ public interface WorkoutServiceInterface {
 
     List<WorkoutEntity> getWorkouts();
 
-    ResponseEntity<String> deleteWorkout(Integer workoutId);
+    WorkoutEntity getWorkoutByName(String name);
+
+
+
+    ResponseEntity<String> deleteWorkout(String workoutName);
 
 
     ResponseEntity<String> addWorkout(WorkoutDto workoutDto);

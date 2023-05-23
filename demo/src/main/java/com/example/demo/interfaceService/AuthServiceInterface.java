@@ -20,5 +20,5 @@ import java.util.Optional;
 public interface AuthServiceInterface {
 
    ResponseEntity<String> register(RegisterDto registerDto) ;
-    ResponseEntity<AuthResponseDto> login(LoginDto loginDto) ;
+    LoginDto login(LoginDto loginDto) ;
 }

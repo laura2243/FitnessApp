@@ -10,5 +10,5 @@ public interface UserServiceInterface {
 
     List<UserEntity> getUsers();
     UserEntity updateUser(Integer userId, RegisterDto newUserEntity);
-    ResponseEntity<String> deleteUser(Integer userId);
+    ResponseEntity<String> deleteUser(String username);
 }

@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.ExerciseDto;
+import com.example.demo.dto.TypeDto;
 import com.example.demo.entity.ExerciseEntity;
+import com.example.demo.entity.TypeEntity;
 import com.example.demo.interfaceService.ExerciseServiceInterface;
 import com.example.demo.repository.ExerciseRepository;
 import com.example.demo.repository.TypeRepository;
@@ -70,29 +72,18 @@ public class ExerciseService implements ExerciseServiceInterface {
         ExerciseEntity exerciseEntity = exerciseRepository.findById(exerciseId).orElseThrow(() -> new IllegalStateException("exercise with id " + exerciseId + " does not exist"));
 
         if (newExercise.getName() != null && newExercise.getName().length() > 0 && !Objects.equals(newExercise.getName(), exerciseEntity.getName())) {
-            Optional<ExerciseEntity> exerciseOptional = exerciseRepository.findUserByName(newExercise.getName());
+            Optional<ExerciseEntity> exerciseOptional = exerciseRepository.findExerciseEntityByName(newExercise.getName());
 
             if (exerciseOptional.isPresent()) {
                 throw new IllegalStateException("name taken");
             }
             exerciseEntity.setName(newExercise.getName());
         }
-        if (newExercise.getDescription() != null && newExercise.getDescription().length() > 0 && !Objects.equals(newExercise.getDuration(), exerciseEntity.getDescription())) {
+        if (newExercise.getGifUrl() != null && newExercise.getGifUrl().length() > 0 && !Objects.equals(newExercise.getGifUrl(), exerciseEntity.getGifUrl())) {
 
-            exerciseEntity.setDescription(newExercise.getDescription());
+            exerciseEntity.setGifUrl(newExercise.getGifUrl());
         }
-        if (newExercise.getHeight() != null && newExercise.getHeight() > 0 && !Objects.equals(newExercise.getHeight(), exerciseEntity.getHeight())) {
-            exerciseEntity.setHeight(newExercise.getHeight());
-        }
-        if (newExercise.getKg() != null && newExercise.getKg() > 0 && !Objects.equals(newExercise.getKg(), exerciseEntity.getKg())) {
-            exerciseEntity.setKg(newExercise.getKg());
-        }
-        if (newExercise.getDuration() != null && newExercise.getDuration() > 0 && !Objects.equals(newExercise.getDuration(), exerciseEntity.getDuration())) {
-            exerciseEntity.setDuration(newExercise.getDuration());
-        }
-        if (newExercise.getAge() != null && newExercise.getAge() > 0 && !Objects.equals(newExercise.getAge(), exerciseEntity.getAge())) {
-            exerciseEntity.setAge(newExercise.getAge());
-        }
+
 
         exerciseRepository.saveAndFlush(exerciseEntity);
 
@@ -111,15 +102,14 @@ public class ExerciseService implements ExerciseServiceInterface {
      * @return ResponseEntity<String>
      */
     public ExerciseEntity addExercise(ExerciseDto exerciseDto) {
-        Optional<ExerciseEntity> exerciseOptionalName = exerciseRepository.findUserByName(exerciseDto.getName());
+        Optional<ExerciseEntity> exerciseOptionalName = exerciseRepository.findExerciseEntityByName(exerciseDto.getName());
         if (exerciseOptionalName.isPresent()) {
             throw new IllegalStateException("name taken");
         }
 
 
-        ExerciseEntity exerciseEntity = new ExerciseEntity(exerciseDto.getName(), exerciseDto.getDescription(),
-                exerciseDto.getDuration(), exerciseDto.getHeight(), exerciseDto.getKg(),
-                exerciseDto.getAge(),exerciseDto.getType());
+        ExerciseEntity exerciseEntity = new ExerciseEntity(exerciseDto.getName(), exerciseDto.getGifUrl(),
+                exerciseDto.getType());
 
 
 
@@ -128,6 +118,14 @@ public class ExerciseService implements ExerciseServiceInterface {
 
         //return new ResponseEntity<>("Exercise added successfully!", HttpStatus.OK);
         return exerciseEntity;
+    }
+
+
+
+    public List<ExerciseEntity> getExercisesByType(TypeDto type) {
+
+
+        return exerciseRepository.findExerciseEntityByTypeName(type.getName());
     }
 
 }

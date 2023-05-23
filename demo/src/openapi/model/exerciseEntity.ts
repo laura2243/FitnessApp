@@ -16,11 +16,7 @@ import { WorkoutEntity } from './workoutEntity';
 export interface ExerciseEntity { 
     id?: number;
     name?: string;
-    description?: string;
-    duration?: number;
-    height?: number;
-    kg?: number;
-    age?: number;
+    gifUrl?: string;
     workout?: Array<WorkoutEntity>;
     type?: TypeEntity;
 }

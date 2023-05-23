@@ -14,11 +14,7 @@ import { TypeEntity } from './typeEntity';
 
 export interface ExerciseDto { 
     name?: string;
-    description?: string;
-    duration?: number;
-    height?: number;
-    kg?: number;
-    age?: number;
     type?: TypeEntity;
+    gifUrl?: string;
 }
 
