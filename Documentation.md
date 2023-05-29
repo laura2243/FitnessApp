@@ -33,13 +33,11 @@ You may also come across your fitness app various times in a day while using you
 #### 2.Login
 - an already registered user can login into its account based on the username and the password that he chose earlier.
 
-#### 3. Personalised recommandations
-- based on each user characteristics, the application will recommand the user a unique workout, that will fit perfectly for the phisycal form that the user wants to accomplish and for the user's interests taking into account the time that a user wants to spend training, the difficulty of the traning and the categories of muscles that he wants to train.
 
-#### 4. Statistics
+#### 3. Statistics
 - the admin is be able to consult statistics for future development of the sofware as well as for improving workouts that are less used, recommand more workouts that are preferred more or modify different aspects of the application .
 
-#### 5. Create custom workouts
+#### 4. Create custom workouts
 - the user can create its own workout consisting of the available exercises so that its preferrences will be satisfied completely. 
 
 # Security
@@ -130,12 +128,9 @@ The listener (observer) will consume an event of type NewUserEvent, is invoked s
 
 1. POST - *adds a new type in the application if its name is not already taken*
  ```public ResponseEntity<String> addType(@RequestBody TypeDto typeDto)```
-2. PUT - *updates a type's fields, if it exists.*
-``` public void updateType(@PathVariable("typeId") Integer typeId, @RequestBody TypeDto typeDto)```
 3. GET - *finds all the types present in the database and returns them.*
 ```public List<TypeEntity> getType() ```
-4. DELETE - *deletes a type resource, if it exists and it is not assigned to any exercise*
-```public void deleteType(@PathVariable("typeId") Integer typeId)```
+
 
 # Unit Testing
 For the most part, unit tests are intended to test a small chunk (or unit) of code. That is usually limited to the code within a function or sometimes extends to some helper functions called from that function. If a unit test is testing code that is dependent on another service or resource, like a database or a network resource, the unit test should “mock” and inject that dependency as to have no actual impact on that external resource. It also limits the focus to just that unit being tested
@@ -172,11 +167,47 @@ I created a mock of WorkoutRepository using ```@Mock``` and create an WorkoutSer
 **EmailTests Class**
 For testing the EmailSenderService I used **GreenMail**. GreenMail is an open source, intuitive and easy-to-use test suite of email servers for testing purposes. GreenMail responds like a regular SMTP server but does not deliver any email, which enables it to be used in real life applications and real test cases. Messages can easily be extracted, verified and modified. 
 I created a mock of EmailSender using ```@Mock``` and create an Email instance using the mock instance. Also, I used the assertTrue() method to assert the conditions using the AssertJ library.
-- JUnit is loading the Spring context as instructed by the ```@ContextConfiguration``` annotation pointing to the Java Configuration class.
-- The ```@Resource``` annotation is autowiring the bean dependency directly on our test conveniently having it initialised during the test runtime.
-- We have an init() activity marked by JUnit’s ```@Before``` annotation where we instantiate our GreenMail mail server and changing the port of our email service to a test one.
-- The test method itself is a simple manner of initialising a test ```SimpleMailMessage``` and sending it via our email service that gets intercepted by GreenMail and further queried upon concerning the data received.
-- A cleanup functionality is closing the resourced during the ```@After``` JUnit instructed method.
+-JUnit is loading the Spring context as instructed by the ```@ContextConfiguration``` annotation pointing to the Java Configuration class.
+– The ```@Resource``` annotation is autowiring the bean dependency directly on our test conveniently having it initialised during the test runtime.
+– We have an init() activity marked by JUnit’s ```@Before``` annotation where we instantiate our GreenMail mail server and changing the port of our email service to a test one.
+– The test method itself is a simple manner of initialising a test ```SimpleMailMessage``` and sending it via our email service that gets intercepted by GreenMail and further queried upon concerning the data received.
+– A cleanup functionality is closing the resourced during the ```@After``` JUnit instructed method.
+
+# Frontend
+Angular is an open-source, JavaScript framework written in TypeScript.
+
+## Why Angular?
+JavaScript is the most commonly used client-side scripting language. It is written into HTML documents to enable interactions with web pages in many unique ways. As a relatively easy-to-learn language with pervasive support, it is well-suited to develop modern applications. 
+
+But is JavaScript ideal for developing single-page applications that require modularity, testability, and developer productivity? Perhaps not. 
+
+These days, we have a variety of frameworks and libraries designed to provide alternative solutions. With respect to front-end web development, Angular addresses many, if not all, of the issues developers face when using JavaScript on its own.
+Angular has apparent advantages as a framework while also providing a standard structure for developers to work with. It enables users to create large applications in a maintainable manner.
+
+## Advantages of Angular
+**Declarative UI**
+An Angular application's user interface (UI) is built using HTML. When compared to JavaScript, HTML is a more straightforward language. It's also a declarative and easy-to-use language, with directives such as ng-app, ng-model, etc.
+
+With its assistance, you won't have to spend time creating program flows and deciding which items should come first. Describe what you want, and Angular will handle the rest.
+
+**POJO (Plain Old Java Object)**
+You don't need any extra getters and setters in Angular. This is because every object Angular employs is a POJO, which allows for object manipulation via all of JavaScript's normal functionalities. You can remove or add properties from the things while also iterating over them as needed.
+
+**Components**
+A component is a self-contained unit of code and data bundled together as a single unit to execute an application. A component generally refers to a user interface section (UI). Angular's component model offers strong encapsulation and an intuitive application structure. For example, Angular Material is a UI component library that implements Material Design in Angular.
+
+Used Components:
+1. **Index page Component** (main paige that includes register and login)
+2. **Add Exercise Component** (used for adding a new exercise by the admin in the database)
+3. **Add Workout Component** (used for adding a new workout by the user)
+4. **Details Workout Component** (for presenting details about a users's workouts)
+5. **Exercises Component**( which present all exercises available)
+6. **Remove Exercise Component** (used for removing an exercise from the database by the admin)
+7. **Update Workout Component**( used for updating an already existing workout by the user)
+8. **Users Component** (used for displaying all users - only for admin)
+
+Regarding the style of the pages, I used html and css to describe the movements of HTML. In essence, I used HTML  for creating the primary content of a webpage, giving it structure. 
+
 
 
 
